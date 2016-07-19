@@ -28,7 +28,7 @@ more information.
   * [todo-mvp-clean/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-clean/) - Based on todo-mvp, uses concepts from Clean Architecture.
   * [todo-mvp-dagger/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-dagger/) - Based on todo-mvp, uses Dagger2 for Dependency Injection
   * [todo-mvp-contentproviders/](https://github.com/googlesamples/android-architecture/tree/todo-mvp-contentproviders/) - Based on todo-mvp-loaders, fetches data using Loaders and uses Content Providers
-  
+
 ### Samples in progress
   * [dev-todo-mvp-rxjava/](https://github.com/googlesamples/android-architecture/tree/dev-todo-mvp-rxjava/) - Based on todo-mvp, uses RxJava for concurrency and data layer abstraction.
 
@@ -37,6 +37,7 @@ Also, see ["New sample" issues](https://github.com/googlesamples/android-archite
 ### External samples
 These are community contributions that may not be in sync with the rest of the branches.
  * [todo-mvp-fragmentless/](https://github.com/Syhids/android-architecture/tree/todo-mvp-fragmentless) - Based on todo-mvp, uses Android views instead of Fragments.
+ * [todo-mvp-clean-dagger/](https://github.com/AndroidClasses/android-architecture/tree/todo-mvp-clean-dagger) - Based on todo-mvp, uses concepts from Clean Architecture and Dagger2 for Dependency Injection.
 
 ### What does <em>beta</em> mean?
 
@@ -98,4 +99,3 @@ This project is **built by the community** and curated by Google and core mainta
 [Mustafa Kurtuldu](https://github.com/mustafa-x) - UX/design
 
 Want to be part of it? Read [how to become a contributor](https://github.com/googlesamples/android-architecture/blob/master/CONTRIBUTING.md) and the [contributor's guide](https://github.com/googlesamples/android-architecture/wiki/Contributions)
-
