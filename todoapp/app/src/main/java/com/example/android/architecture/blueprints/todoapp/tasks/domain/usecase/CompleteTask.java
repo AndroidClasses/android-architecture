@@ -19,7 +19,7 @@ package com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase
 import android.support.annotation.NonNull;
 
 import com.example.android.architecture.blueprints.todoapp.UseCase;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
+import com.repository.task.data.TasksRepository;
 
 import javax.inject.Inject;
 

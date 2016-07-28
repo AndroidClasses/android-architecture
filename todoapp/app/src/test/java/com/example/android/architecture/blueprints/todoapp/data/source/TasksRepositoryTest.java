@@ -27,7 +27,9 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.TasksRepository;
+import com.repository.task.model.Task;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;

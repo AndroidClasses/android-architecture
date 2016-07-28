@@ -3,7 +3,7 @@ package com.example.android.architecture.blueprints.todoapp.data.source;
 import android.content.Context;
 
 import com.example.android.architecture.blueprints.todoapp.data.FakeTasksRemoteDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksLocalDataSource;
+import com.repository.task.data.local.TasksLocalDataSource;
 
 import javax.inject.Singleton;
 

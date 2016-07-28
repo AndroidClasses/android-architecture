@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data.source;
+package com.repository.task.data;
 
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
+import com.repository.task.model.Task;
 
 import java.util.List;
 

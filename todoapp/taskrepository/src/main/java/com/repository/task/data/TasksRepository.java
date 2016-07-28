@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data.source;
+package com.repository.task.data;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
+import com.repository.task.model.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,7 +58,7 @@ public class TasksRepository implements TasksDataSource {
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    Map<String, Task> mCachedTasks;
+    public Map<String, Task> mCachedTasks;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -79,7 +79,7 @@ public class TasksRepository implements TasksDataSource {
      * with {@code @Nullable} values.
      */
     @Inject
-    TasksRepository(@Remote TasksDataSource tasksRemoteDataSource,
+    public TasksRepository(@Remote TasksDataSource tasksRemoteDataSource,
             @Local TasksDataSource tasksLocalDataSource) {
         mTasksRemoteDataSource = tasksRemoteDataSource;
         mTasksLocalDataSource = tasksLocalDataSource;

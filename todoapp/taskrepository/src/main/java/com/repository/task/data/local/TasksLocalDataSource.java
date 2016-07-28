@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data.source.local;
+package com.repository.task.data.local;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,9 +22,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksPersistenceContract.TaskEntry;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.local.TasksPersistenceContract.TaskEntry;
+import com.repository.task.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.data.source.local;
+package com.repository.task.data.local;
 
 import android.provider.BaseColumns;
 

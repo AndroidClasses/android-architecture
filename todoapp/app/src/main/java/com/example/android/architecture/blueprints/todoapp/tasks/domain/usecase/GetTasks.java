@@ -19,9 +19,9 @@ package com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase
 import android.support.annotation.NonNull;
 
 import com.example.android.architecture.blueprints.todoapp.UseCase;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
+import com.repository.task.model.Task;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.TasksRepository;
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksFilterType;
 import com.example.android.architecture.blueprints.todoapp.tasks.domain.filter.FilterFactory;
 import com.example.android.architecture.blueprints.todoapp.tasks.domain.filter.TaskFilter;

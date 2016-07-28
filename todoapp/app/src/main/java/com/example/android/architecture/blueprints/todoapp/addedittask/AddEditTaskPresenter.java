@@ -23,7 +23,7 @@ import com.example.android.architecture.blueprints.todoapp.UseCase;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.GetTask;
 import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.SaveTask;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
+import com.repository.task.model.Task;
 
 import javax.inject.Inject;
 

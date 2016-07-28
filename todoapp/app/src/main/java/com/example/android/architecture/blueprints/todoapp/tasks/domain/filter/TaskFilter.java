@@ -16,7 +16,8 @@
 
 package com.example.android.architecture.blueprints.todoapp.tasks.domain.filter;
 
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
+
+import com.repository.task.model.Task;
 
 import java.util.List;
 

@@ -18,9 +18,9 @@ package com.example.android.architecture.blueprints.todoapp.statistics;
 
 import com.example.android.architecture.blueprints.todoapp.TestUseCaseScheduler;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.model.Task;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepository;
+import com.repository.task.model.Task;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.TasksRepository;
 import com.example.android.architecture.blueprints.todoapp.statistics.domain.usecase.GetStatistics;
 import com.google.common.collect.Lists;
 

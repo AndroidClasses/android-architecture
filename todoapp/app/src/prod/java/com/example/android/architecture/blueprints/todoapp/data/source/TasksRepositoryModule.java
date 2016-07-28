@@ -2,8 +2,12 @@ package com.example.android.architecture.blueprints.todoapp.data.source;
 
 import android.content.Context;
 
-import com.example.android.architecture.blueprints.todoapp.data.source.local.TasksLocalDataSource;
-import com.example.android.architecture.blueprints.todoapp.data.source.remote.TasksRemoteDataSource;
+import com.repository.task.data.Local;
+import com.repository.task.data.Remote;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.TasksRepository;
+import com.repository.task.data.local.TasksLocalDataSource;
+import com.repository.task.data.remote.TasksRemoteDataSource;
 
 import javax.inject.Singleton;
 

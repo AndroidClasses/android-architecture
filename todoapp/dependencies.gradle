@@ -1,0 +1,171 @@
+ext.versions = [
+        //code : 16,
+        //name : '1.0-16p',
+        // raise version code to 21, and version name start from 1.1 with gif/emoji developing.
+        code : 1,
+        name : '1.0',
+
+        minSdk : 10,
+        targetSdk : 22,
+        compileSdk : 23,
+        buildTools : '23.0.2',
+
+        androidGradlePlugin          : '2.0.0',
+        aptGradlePlugin              : '1.8',
+        retrolambdaGradlePlugin      : '3.2.5',
+        lombokGradlePlugin           : '0.2.3.a2',
+        paperworkGradlePlugin        : '1.2.7',
+        jacocoGradlePlugin           : '0.7.6.201602180812',
+        androidDevMetricsGradlePlugin: '0.4',
+
+        dagger                       : '2.4',
+
+        rxAndroid                    : '1.2.0',
+        rxJava                       : '1.1.5',
+        rxLint                       : '1.0',
+        supportLibs                  : '23.1.1',
+        okHttp                       : '3.2.0',
+        retrofit                     : '2.0.0-beta4',
+        jackson                      : '2.6.3',
+        autoValue                    : '1.2-rc1',
+        butterKnife                  : '8.0.1',
+        glide                        : '3.7.0',
+        picasso                      : '2.5.2',
+        picassoOkHttpDownloader      : '1.0.2',
+        timber                       : '4.1.2',
+
+        espresso                     : '2.2.1',
+        stetho                       : '1.3.1',
+        leakCanary                   : '1.4-beta2',
+        tinyDancer                   : '0.0.8',
+        yandexAppMetrica             : '2.40',
+        lynx                         : '1.6',
+        processPhoenix               : '1.0.2',
+
+        junit : '4.12',
+        robolectric                  : '3.0',
+        assertJ                      : '2.4.0',
+        equalsVerifier               : '1.7.5',
+        mockito : '1.10.19',
+        supportTestRunner            : '0.5',
+
+        guava : '18.0',
+        glide : '3.6.1',
+        powerMockito : '1.6.2',
+        hamcrest : '1.3',
+        googleServices : '1.5.0',
+        facebookSdk             : '4.1.0',
+        playService : '8.3.0',
+
+        javaxAnnotation         : '10.0-b28',
+        eventbus                : '3.0.0-beta1',
+        gson                    : '2.2.+',
+        recyclerFlexibledivider : '1.2.9',
+        commonLang              : '3.3.+',
+        umengAnalytics       : '5.6.4',
+        universalImageLoader : '1.9.5',
+        strictmodeNotifier : '0.8.2',
+        showcaseView : '5.4.3',
+        asyncHttp    : '1.4.9',
+        httpClient   : '4.4.1.2',
+]
+
+ext.gradlePlugins = [
+        android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
+        apt              : "com.neenbedankt.gradle.plugins:android-apt:$versions.aptGradlePlugin",
+        retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
+        lombok           : "me.tatarka.retrolambda.projectlombok:lombok.ast:$versions.lombokGradlePlugin",
+        paperwork        : "hu.supercluster:paperwork-plugin:$versions.paperworkGradlePlugin",
+        jacoco           : "org.jacoco:org.jacoco.core:$versions.jacocoGradlePlugin",
+        androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetricsGradlePlugin",
+        googleServices   : "com.google.gms:google-services:$versions.googleServices",
+]
+
+ext.libraries = [
+        dagger                  : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
+//        javaxInject             : "javax.inject:javax.inject:1",
+//        javaxAnnotationApi      : "javax.annotation:javax.annotation-api:1.2",
+
+        rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
+        rxLint                  : "nl.littlerobots.rxlint:rxlint:$versions.rxLint",
+
+        okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
+        okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+        retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        retrofitJacksonConverter: "com.squareup.retrofit2:converter-jackson:$versions.retrofit",
+        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        jacksonDataBind         : "com.fasterxml.jackson.core:jackson-databind:$versions.jackson",
+
+        autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",
+
+        supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign           : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView     : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView         : "com.android.support:cardview-v7:$versions.supportLibs",
+
+        butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
+        glide                   : "com.github.bumptech.glide:glide:$versions.glide",
+        picassoOkHttpDownloader : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkHttpDownloader",
+        timber                  : "com.jakewharton.timber:timber:$versions.timber",
+
+        // Analytics https://tech.yandex.com/metrica-mobile-sdk/
+        yandexAppMetrica        : "com.yandex.android:mobmetricalib:$versions.yandexAppMetrica",
+
+        javaxAnnotation         : "org.glassfish:javax.annotation:$versions.javaxAnnotation",
+        guava                   : "com.google.guava:guava:$versions.guava",
+        eventbus                : "de.greenrobot:eventbus:$versions.eventbus",
+        gson                    : "com.google.code.gson:gson:$versions.gson",
+        rxjavaAndroid           : "io.reactivex:rxandroid:$versions.rxAndroid",
+        recyclerFlexibledivider : "com.yqritc:recyclerview-flexibledivider:$versions.recyclerFlexibledivider",
+        recyclerMultiselect     : "com.bignerdranch.android:recyclerview-multiselect:+",
+
+        commonLang              : "org.apache.commons:commons-lang3:$versions.commonLang",
+        umengAnalytics          : "com.umeng.analytics:analytics:$versions.umengAnalytics",
+
+        espressoIdleResource    : "com.android.support.test.espresso:espresso-idling-resource:$versions.espresso",
+
+        facebookSdk             : "com.facebook.android:facebook-android-sdk:$versions.facebookSdk",
+        playService             : "com.google.android.gms:play-services:$versions.playService",
+        playAnalytics           : "com.google.android.gms:play-services-analytics:$versions.playService",
+
+        universalImageLoader    : "com.nostra13.universalimageloader:universal-image-loader:$versions.universalImageLoader",
+
+        // Developer Tools
+        stetho                  : "com.facebook.stetho:stetho:$versions.stetho",
+        stethoOkHttp            : "com.facebook.stetho:stetho-okhttp3:$versions.stetho",
+        leakCanary              : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+        tinyDancer              : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
+        paperwork               : "hu.supercluster:paperwork:$versions.paperworkGradlePlugin",
+        lynx                    : "com.github.pedrovgs:lynx:$versions.lynx",
+        devMetricsNoOp          : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
+        processPhoenix          : "com.jakewharton:process-phoenix:$versions.processPhoenix",
+
+        // Test dependencies
+        junit                   : "junit:junit:$versions.junit",
+        robolectric             : "org.robolectric:robolectric:$versions.robolectric",
+        assertJ                 : "org.assertj:assertj-core:$versions.assertJ",
+        equalsVerifier          : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
+        okHttpMockWebServer     : "com.squareup.okhttp3:mockwebserver:$versions.okHttp",
+        mockitoCore             : "org.mockito:mockito-core:$versions.mockito",
+        supportTestRunner       : "com.android.support.test:runner:$versions.supportTestRunner",
+        supportTestRules        : "com.android.support.test:rules:$versions.supportTestRunner",
+        espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+        espressoIntents         : "com.android.support.test.espresso:espresso-intents:$versions.espresso",
+
+        mockitoAll              : "org.mockito:mockito-all:$versions.mockito",
+        hamcrestAll             : "org.hamcrest:hamcrest-all:$versions.hamcrest",
+        powerMockJunit4         : "org.powermock:powermock-module-junit4:$versions.powerMockito",
+        powerMockApiMockito     : "org.powermock:powermock-api-mockito:$versions.powerMockito",
+
+        strictmodeNotifier      : "com.nshmura:strictmode-notifier:$versions.strictmodeNotifier",
+        strictmodeNotifierNoOp  : "com.nshmura:strictmode-notifier-no-op:$versions.strictmodeNotifier",
+
+        showcaseView            : "com.github.amlcurran.showcaseview:library:$versions.showcaseView",
+        asyncHttp               : "com.loopj.android:android-async-http:$versions.asyncHttp",
+        httpClient              : "cz.msebera.android:httpclient:$versions.httpClient",
+]
