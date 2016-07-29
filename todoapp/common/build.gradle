@@ -22,7 +22,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-//    compile project(':common')
+//    compile project(path: ':common')
 
     compile libraries.supportAppCompat
     compile libraries.supportDesign

@@ -70,12 +70,20 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
-    compile "com.google.guava:guava:$rootProject.guavaVersion"
+
+    compile libraries.guava
 
     // Dagger dependencies
-    apt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    apt libraries.butterKnifeCompiler
+    compile libraries.butterKnife
+
+    apt libraries.daggerCompiler
+    provided libraries.javaxAnnotation
+    compile libraries.dagger
+
+//    apt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+//    provided 'org.glassfish:javax.annotation:10.0-b28'
+//    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
 
     // Dependencies for local unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
@@ -101,5 +109,5 @@ dependencies {
     androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
     androidTestCompile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     androidTestCompile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
-    compile project(path: ':taskdomain')
+    compile project(path: ':taskui')
 }

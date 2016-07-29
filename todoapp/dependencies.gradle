@@ -23,7 +23,7 @@ ext.versions = [
         rxAndroid                    : '1.2.0',
         rxJava                       : '1.1.5',
         rxLint                       : '1.0',
-        supportLibs                  : '23.1.1',
+        supportLibs                  : '23.4.0',
         okHttp                       : '3.2.0',
         retrofit                     : '2.0.0-beta4',
         jackson                      : '2.6.3',

@@ -1,13 +1,14 @@
 package com.example.android.architecture.blueprints.todoapp;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskComponent;
-import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsComponent;
-import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailComponent;
-import com.example.android.architecture.blueprints.todoapp.tasks.TasksComponent;
+import com.common.ui.app.ApplicationModule;
+import com.common.ui.app.BaseApplication;
+import com.task.ui.addedittask.AddEditTaskComponent;
+import com.task.ui.app.TaskRepositoryHolder;
+import com.task.ui.statistics.StatisticsComponent;
+import com.task.ui.taskdetail.TaskDetailComponent;
+import com.task.ui.tasks.TasksComponent;
 
 /**
  * Even though Dagger2 allows annotating a {@link dagger.Component} as a singleton, the code itself
@@ -24,15 +25,9 @@ import com.example.android.architecture.blueprints.todoapp.tasks.TasksComponent;
  * completed and deleting it<BR />
  * {@link StatisticsComponent}: viewing statistics about your to do items<BR />
  */
-public class ToDoApplication extends Application {
+public class ToDoApplication extends BaseApplication implements TaskRepositoryHolder {
 
     private TasksRepositoryComponent mRepositoryComponent;
-
-    // Prevent need in a singleton (global) reference to the application object.
-    @NonNull
-    public static ToDoApplication get(@NonNull Context context) {
-        return (ToDoApplication) context.getApplicationContext();
-    }
 
     @Override
     public void onCreate() {
@@ -46,5 +41,4 @@ public class ToDoApplication extends Application {
     public TasksRepositoryComponent getTasksRepositoryComponent() {
         return mRepositoryComponent;
     }
-
 }

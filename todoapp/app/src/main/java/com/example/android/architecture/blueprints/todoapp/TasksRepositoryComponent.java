@@ -1,5 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp;
 
+import com.common.ui.app.ApplicationModule;
+import com.common.ui.app.UseCaseHandler;
 import com.repository.task.data.TasksRepository;
 
 import javax.inject.Singleton;

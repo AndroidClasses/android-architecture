@@ -23,17 +23,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile project(':common')
+    compile project(path: ':common')
 
-    compile libraries.supportAppCompat
-    compile libraries.supportDesign
-    testCompile libraries.junit
-//    testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile libraries.guava
 
     // Dagger dependencies
-    apt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+    apt libraries.daggerCompiler
+    provided libraries.javaxAnnotation
+    compile libraries.dagger
 }
