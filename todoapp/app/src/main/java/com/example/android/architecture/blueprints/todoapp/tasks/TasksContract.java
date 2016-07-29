@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import com.clean.common.mvp.BasePresenter;
 import com.clean.common.mvp.BaseView;
 import com.repository.task.model.Task;
+import com.task.domain.usecase.filter.TasksFilterType;
 
 import java.util.List;
 

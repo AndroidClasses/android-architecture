@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks.domain.filter;
+package com.task.domain.usecase.filter;
 
-import com.repository.task.model.Task;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Returns the completed tasks from a list of {@link Task}s.
+ * Factory of {@link TaskFilter}s.
  */
-class CompleteTaskFilter implements TaskFilter {
-    @Override
-    public List<Task> filter(List<Task> tasks) {
-        List<Task> filteredTasks = new ArrayList<>();
+public class FilterFactory {
 
-        for (Task task : tasks) {
-            if (task.isCompleted()) {
-                filteredTasks.add(task);
-            }
-        }
-        return filteredTasks;
+    private static final Map<TasksFilterType, TaskFilter> mFilters = new HashMap<>();
+
+    public FilterFactory() {
+        mFilters.put(TasksFilterType.ALL_TASKS, new FilterAllTaskFilter());
+        mFilters.put(TasksFilterType.ACTIVE_TASKS, new ActiveTaskFilter());
+        mFilters.put(TasksFilterType.COMPLETED_TASKS, new CompleteTaskFilter());
+    }
+
+    public TaskFilter create(TasksFilterType filterType) {
+        return mFilters.get(filterType);
     }
 }

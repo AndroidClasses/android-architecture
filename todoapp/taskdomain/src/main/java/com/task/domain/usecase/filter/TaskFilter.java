@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks.domain.filter;
+package com.task.domain.usecase.filter;
 
 
 import com.repository.task.model.Task;

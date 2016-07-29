@@ -21,8 +21,8 @@ import android.support.annotation.Nullable;
 
 import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.GetTask;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.SaveTask;
+import com.task.domain.usecase.GetTask;
+import com.task.domain.usecase.SaveTask;
 import com.repository.task.model.Task;
 
 import javax.inject.Inject;

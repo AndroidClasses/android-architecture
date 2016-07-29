@@ -14,36 +14,52 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase;
+package com.task.domain.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.clean.common.usecase.UseCase;
-import com.repository.task.data.TasksRepository;
 import com.repository.task.model.Task;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.data.TasksRepository;
 
 import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Deletes a {@link Task} from the {@link TasksRepository}.
+ * Retrieves a {@link Task} from the {@link TasksRepository}.
  */
-public class DeleteTask extends UseCase<DeleteTask.RequestValues, DeleteTask.ResponseValue> {
+public class GetTask extends UseCase<GetTask.RequestValues, GetTask.ResponseValue> {
 
     private final TasksRepository mTasksRepository;
 
-    @Inject public DeleteTask(@NonNull TasksRepository tasksRepository) {
+    @Inject public GetTask(@NonNull TasksRepository tasksRepository) {
         mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
-        mTasksRepository.deleteTask(values.getTaskId());
-        getUseCaseCallback().onSuccess(new ResponseValue());
+        mTasksRepository.getTask(values.getTaskId(), new TasksDataSource.GetTaskCallback() {
+            @Override
+            public void onTaskLoaded(Task task) {
+                if (task != null) {
+                    ResponseValue responseValue = new ResponseValue(task);
+                    getUseCaseCallback().onSuccess(responseValue);
+                } else {
+                    getUseCaseCallback().onError();
+                }
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                getUseCaseCallback().onError();
+            }
+        });
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
+
         private final String mTaskId;
 
         public RequestValues(@NonNull String taskId) {
@@ -55,5 +71,16 @@ public class DeleteTask extends UseCase<DeleteTask.RequestValues, DeleteTask.Res
         }
     }
 
-    public static final class ResponseValue implements UseCase.ResponseValue { }
+    public static final class ResponseValue implements UseCase.ResponseValue {
+
+        private Task mTask;
+
+        public ResponseValue(@NonNull Task task) {
+            mTask = checkNotNull(task, "task cannot be null!");
+        }
+
+        public Task getTask() {
+            return mTask;
+        }
+    }
 }

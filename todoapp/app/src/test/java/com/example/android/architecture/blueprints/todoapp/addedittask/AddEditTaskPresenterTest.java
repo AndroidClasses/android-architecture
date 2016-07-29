@@ -18,8 +18,8 @@ package com.example.android.architecture.blueprints.todoapp.addedittask;
 
 import com.example.android.architecture.blueprints.todoapp.TestUseCaseScheduler;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.GetTask;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.SaveTask;
+import com.task.domain.usecase.GetTask;
+import com.task.domain.usecase.SaveTask;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;

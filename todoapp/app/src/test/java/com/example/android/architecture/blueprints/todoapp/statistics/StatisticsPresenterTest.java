@@ -21,7 +21,7 @@ import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
-import com.example.android.architecture.blueprints.todoapp.statistics.domain.usecase.GetStatistics;
+import com.task.domain.usecase.GetStatistics;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;

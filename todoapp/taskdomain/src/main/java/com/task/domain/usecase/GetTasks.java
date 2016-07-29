@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase;
+package com.task.domain.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.clean.common.usecase.UseCase;
-import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
-import com.example.android.architecture.blueprints.todoapp.tasks.TasksFilterType;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.filter.FilterFactory;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.filter.TaskFilter;
+import com.repository.task.model.Task;
+import com.task.domain.usecase.filter.FilterFactory;
+import com.task.domain.usecase.filter.TaskFilter;
+import com.task.domain.usecase.filter.TasksFilterType;
 
 import java.util.List;
 

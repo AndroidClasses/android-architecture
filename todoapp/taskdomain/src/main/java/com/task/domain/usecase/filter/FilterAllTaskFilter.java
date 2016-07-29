@@ -14,24 +14,19 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks;
+package com.task.domain.usecase.filter;
+
+import com.repository.task.model.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Used with the filter spinner in the tasks list.
+ * Returns all the tasks from a list of {@link Task}s.
  */
-public enum TasksFilterType {
-    /**
-     * Do not filter tasks.
-     */
-    ALL_TASKS,
-
-    /**
-     * Filters only the active (not completed yet) tasks.
-     */
-    ACTIVE_TASKS,
-
-    /**
-     * Filters only the completed tasks.
-     */
-    COMPLETED_TASKS
+class FilterAllTaskFilter implements TaskFilter {
+    @Override
+    public List<Task> filter(List<Task> tasks) {
+        return new ArrayList<>(tasks);
+    }
 }

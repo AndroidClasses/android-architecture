@@ -18,13 +18,13 @@ package com.example.android.architecture.blueprints.todoapp.taskdetail;
 
 import com.example.android.architecture.blueprints.todoapp.TestUseCaseScheduler;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.DeleteTask;
-import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.GetTask;
+import com.task.domain.usecase.DeleteTask;
+import com.task.domain.usecase.GetTask;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.ActivateTask;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.CompleteTask;
+import com.task.domain.usecase.ActivateTask;
+import com.task.domain.usecase.CompleteTask;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -43,6 +43,7 @@ import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity;
 import com.example.android.architecture.blueprints.todoapp.taskdetail.TaskDetailActivity;
 import com.repository.task.model.Task;
+import com.task.domain.usecase.filter.TasksFilterType;
 
 import java.util.ArrayList;
 import java.util.List;

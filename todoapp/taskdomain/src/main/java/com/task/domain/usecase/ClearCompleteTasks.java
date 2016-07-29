@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase;
+package com.task.domain.usecase;
 
 import android.support.annotation.NonNull;
 
@@ -26,35 +26,24 @@ import javax.inject.Inject;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Marks a task as active (not completed yet).
+ * Deletes tasks marked as completed.
  */
-public class ActivateTask extends UseCase<ActivateTask.RequestValues, ActivateTask.ResponseValue> {
+public class ClearCompleteTasks
+        extends UseCase<ClearCompleteTasks.RequestValues, ClearCompleteTasks.ResponseValue> {
 
     private final TasksRepository mTasksRepository;
 
-    @Inject public ActivateTask(@NonNull TasksRepository tasksRepository) {
+    @Inject public ClearCompleteTasks(@NonNull TasksRepository tasksRepository) {
         mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
-        String activeTask = values.getActivateTask();
-        mTasksRepository.activateTask(activeTask);
+        mTasksRepository.clearCompletedTasks();
         getUseCaseCallback().onSuccess(new ResponseValue());
     }
 
-    public static final class RequestValues implements UseCase.RequestValues {
+    public static class RequestValues implements UseCase.RequestValues { }
 
-        private final String mActivateTask;
-
-        public RequestValues(@NonNull String activateTask) {
-            mActivateTask = checkNotNull(activateTask, "activateTask cannot be null!");
-        }
-
-        public String getActivateTask() {
-            return mActivateTask;
-        }
-    }
-
-    public static final class ResponseValue implements UseCase.ResponseValue { }
+    public static class ResponseValue implements UseCase.ResponseValue { }
 }

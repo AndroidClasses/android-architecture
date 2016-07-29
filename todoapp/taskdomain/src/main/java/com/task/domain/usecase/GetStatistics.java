@@ -1,4 +1,4 @@
-package com.example.android.architecture.blueprints.todoapp.statistics.domain.usecase;
+package com.task.domain.usecase;
 
 import android.support.annotation.NonNull;
 

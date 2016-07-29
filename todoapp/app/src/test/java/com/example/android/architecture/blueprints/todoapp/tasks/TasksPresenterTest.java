@@ -21,12 +21,13 @@ import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource.LoadTasksCallback;
 import com.repository.task.data.TasksRepository;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.filter.FilterFactory;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.ActivateTask;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.ClearCompleteTasks;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.CompleteTask;
-import com.example.android.architecture.blueprints.todoapp.tasks.domain.usecase.GetTasks;
+import com.task.domain.usecase.filter.FilterFactory;
+import com.task.domain.usecase.ActivateTask;
+import com.task.domain.usecase.ClearCompleteTasks;
+import com.task.domain.usecase.CompleteTask;
+import com.task.domain.usecase.GetTasks;
 import com.google.common.collect.Lists;
+import com.task.domain.usecase.filter.TasksFilterType;
 
 import org.junit.Before;
 import org.junit.Test;
