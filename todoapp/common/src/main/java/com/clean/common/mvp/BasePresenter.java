@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
+package com.clean.common.mvp;
 
-public interface BaseView<T> {
+public interface BasePresenter {
 
-    void setPresenter(T presenter);
+    void start();
 
 }

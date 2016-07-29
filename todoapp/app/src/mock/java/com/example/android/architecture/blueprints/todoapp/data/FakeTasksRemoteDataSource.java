@@ -19,9 +19,9 @@ package com.example.android.architecture.blueprints.todoapp.data;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksDataSource;
-import com.repository.task.model.Task;
 import com.google.common.collect.Lists;
+import com.repository.task.data.TasksDataSource;
+import com.repository.task.model.Task;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

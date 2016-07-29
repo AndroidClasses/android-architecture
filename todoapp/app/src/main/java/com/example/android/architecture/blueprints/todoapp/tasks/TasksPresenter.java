@@ -19,7 +19,7 @@ package com.example.android.architecture.blueprints.todoapp.tasks;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.UseCase;
+import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.example.android.architecture.blueprints.todoapp.addedittask.AddEditTaskActivity;
 import com.repository.task.model.Task;

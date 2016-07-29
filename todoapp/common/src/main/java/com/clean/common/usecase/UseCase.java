@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
+package com.clean.common.usecase;
 
 /**
  * Use cases are the entry points to the domain layer.
@@ -44,7 +44,7 @@ public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase
         mUseCaseCallback = useCaseCallback;
     }
 
-    void run() {
+    public void run() {
        executeUseCase(mRequestValues);
     }
 

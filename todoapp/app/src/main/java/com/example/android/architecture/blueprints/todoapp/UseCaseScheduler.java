@@ -16,6 +16,8 @@
 
 package com.example.android.architecture.blueprints.todoapp;
 
+import com.clean.common.usecase.UseCase;
+
 /**
  * Interface for schedulers, see {@link UseCaseThreadPoolScheduler}.
  */

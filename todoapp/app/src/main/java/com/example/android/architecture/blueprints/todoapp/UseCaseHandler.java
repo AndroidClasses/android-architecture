@@ -17,6 +17,7 @@
 package com.example.android.architecture.blueprints.todoapp;
 
 
+import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
 
 import javax.inject.Inject;

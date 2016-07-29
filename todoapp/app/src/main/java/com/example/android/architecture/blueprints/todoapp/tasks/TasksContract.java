@@ -18,8 +18,8 @@ package com.example.android.architecture.blueprints.todoapp.tasks;
 
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.BasePresenter;
-import com.example.android.architecture.blueprints.todoapp.BaseView;
+import com.clean.common.mvp.BasePresenter;
+import com.clean.common.mvp.BaseView;
 import com.repository.task.model.Task;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package com.example.android.architecture.blueprints.todoapp.statistics.domain.us
 
 import android.support.annotation.NonNull;
 
-import com.example.android.architecture.blueprints.todoapp.UseCase;
+import com.clean.common.usecase.UseCase;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
 import com.repository.task.model.Statistics;

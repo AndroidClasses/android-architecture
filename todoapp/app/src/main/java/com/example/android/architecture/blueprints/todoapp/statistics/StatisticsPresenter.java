@@ -16,7 +16,7 @@
 
 package com.example.android.architecture.blueprints.todoapp.statistics;
 
-import com.example.android.architecture.blueprints.todoapp.UseCase;
+import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.repository.task.model.Statistics;
 import com.example.android.architecture.blueprints.todoapp.statistics.domain.usecase.GetStatistics;

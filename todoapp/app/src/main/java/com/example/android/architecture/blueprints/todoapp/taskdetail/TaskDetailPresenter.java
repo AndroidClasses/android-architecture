@@ -18,7 +18,7 @@ package com.example.android.architecture.blueprints.todoapp.taskdetail;
 
 import android.support.annotation.Nullable;
 
-import com.example.android.architecture.blueprints.todoapp.UseCase;
+import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.UseCaseHandler;
 import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.DeleteTask;
 import com.example.android.architecture.blueprints.todoapp.addedittask.domain.usecase.GetTask;

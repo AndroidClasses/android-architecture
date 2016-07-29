@@ -18,6 +18,8 @@ package com.example.android.architecture.blueprints.todoapp;
 
 import android.os.Handler;
 
+import com.clean.common.usecase.UseCase;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -56,7 +58,7 @@ public class UseCaseThreadPoolScheduler implements UseCaseScheduler {
 
     @Override
     public <V extends UseCase.ResponseValue> void notifyResponse(final V response,
-            final UseCase.UseCaseCallback<V> useCaseCallback) {
+                                                                 final UseCase.UseCaseCallback<V> useCaseCallback) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
