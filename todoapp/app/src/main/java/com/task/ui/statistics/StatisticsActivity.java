@@ -32,12 +32,15 @@ import com.task.ui.tasks.TasksActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Show statistics for tasks.
  */
 public class StatisticsActivity extends BaseTaskActivity {
 
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
     @Inject StatisticsPresenter mStatiticsPresenter;
 
@@ -46,9 +49,10 @@ public class StatisticsActivity extends BaseTaskActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.statistics_act);
+        ButterKnife.bind(this);
 
         // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setTitle(R.string.statistics_title);
@@ -56,9 +60,9 @@ public class StatisticsActivity extends BaseTaskActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Set up the navigation drawer.
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }

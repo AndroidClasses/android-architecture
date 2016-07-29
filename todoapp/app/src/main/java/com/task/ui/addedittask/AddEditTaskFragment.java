@@ -30,6 +30,9 @@ import android.widget.TextView;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -41,9 +44,9 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
 
     private AddEditTaskContract.Presenter mPresenter;
 
-    private TextView mTitle;
+    @BindView(R.id.add_task_title) TextView mTitle;
 
-    private TextView mDescription;
+    @BindView(R.id.add_task_description) TextView mDescription;
 
     public static AddEditTaskFragment newInstance() {
         return new AddEditTaskFragment();
@@ -68,8 +71,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_task_done);
+        FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_edit_task_done);
         fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +86,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
-        mTitle = (TextView) root.findViewById(R.id.add_task_title);
-        mDescription = (TextView) root.findViewById(R.id.add_task_description);
+        ButterKnife.bind(this, root);
 
         setHasOptionsMenu(true);
         setRetainInstance(true);

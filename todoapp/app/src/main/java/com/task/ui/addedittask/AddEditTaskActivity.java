@@ -29,6 +29,8 @@ import com.task.ui.BaseTaskActivity;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+
 /**
  * Displays an add or edit task screen.
  */
@@ -42,9 +44,10 @@ public class AddEditTaskActivity extends BaseTaskActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask_act);
+        ButterKnife.bind(this);
 
         // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

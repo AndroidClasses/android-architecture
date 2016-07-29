@@ -29,6 +29,8 @@ import com.task.ui.BaseTaskActivity;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+
 /**
  * Displays task details screen.
  */
@@ -43,9 +45,10 @@ public class TaskDetailActivity extends BaseTaskActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.taskdetail_act);
+        ButterKnife.bind(this);
 
         // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);

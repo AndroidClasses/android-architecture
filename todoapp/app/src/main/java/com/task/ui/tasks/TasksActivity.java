@@ -36,11 +36,14 @@ import com.task.ui.statistics.StatisticsActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TasksActivity extends BaseTaskActivity {
 
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
 
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
 
     @Inject TasksPresenter mTasksPresenter;
 
@@ -48,19 +51,19 @@ public class TasksActivity extends BaseTaskActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
-
+        ButterKnife.bind(this);
 
         // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Set up the navigation drawer.
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }

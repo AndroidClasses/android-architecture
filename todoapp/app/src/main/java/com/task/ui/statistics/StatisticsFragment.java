@@ -16,8 +16,6 @@
 
 package com.task.ui.statistics;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,12 +27,17 @@ import android.widget.TextView;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Main UI for the statistics screen.
  */
 public class StatisticsFragment extends Fragment implements StatisticsContract.View {
 
-    private TextView mStatisticsTV;
+    @BindView(R.id.statistics) TextView mStatisticsTV;
 
     private StatisticsContract.Presenter mPresenter;
 
@@ -52,7 +55,8 @@ public class StatisticsFragment extends Fragment implements StatisticsContract.V
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.statistics_frag, container, false);
-        mStatisticsTV = (TextView) root.findViewById(R.id.statistics);
+        ButterKnife.bind(this, root);
+//        mStatisticsTV = (TextView) root.findViewById(R.id.statistics);
         return root;
     }
 

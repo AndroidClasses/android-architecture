@@ -16,8 +16,6 @@
 
 package com.task.ui.taskdetail;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,6 +38,11 @@ import com.example.android.architecture.blueprints.todoapp.R;
 import com.task.ui.addedittask.AddEditTaskActivity;
 import com.task.ui.addedittask.AddEditTaskFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Main UI for the task detail screen.
  */
@@ -51,11 +54,11 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     private TaskDetailContract.Presenter mPresenter;
 
-    private TextView mDetailTitle;
+    @BindView(R.id.task_detail_title) TextView mDetailTitle;
 
-    private TextView mDetailDescription;
+    @BindView(R.id.task_detail_description) TextView mDetailDescription;
 
-    private CheckBox mDetailCompleteStatus;
+    @BindView(R.id.task_detail_complete) CheckBox mDetailCompleteStatus;
 
     public static TaskDetailFragment newInstance(String taskId) {
         Bundle arguments = new Bundle();
@@ -76,14 +79,14 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
+        ButterKnife.bind(this, root);
         setHasOptionsMenu(true);
-        mDetailTitle = (TextView) root.findViewById(R.id.task_detail_title);
-        mDetailDescription = (TextView) root.findViewById(R.id.task_detail_description);
-        mDetailCompleteStatus = (CheckBox) root.findViewById(R.id.task_detail_complete);
+//        mDetailTitle = (TextView) root.findViewById(R.id.task_detail_title);
+//        mDetailDescription = (TextView) root.findViewById(R.id.task_detail_description);
+//        mDetailCompleteStatus = (CheckBox) root.findViewById(R.id.task_detail_complete);
 
         // Set up floating action button
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_task);
+        FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_edit_task);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
