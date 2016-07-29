@@ -2,13 +2,15 @@ package com.example.android.architecture.blueprints.todoapp;
 
 import android.content.Context;
 
+import com.clean.common.usecase.UseCaseScheduler;
+
 import dagger.Module;
 import dagger.Provides;
 
 /**
  * This is a Dagger module. We use this to pass in the Context dependency to the
  * {@link
- * com.example.android.architecture.blueprints.todoapp.data.source.TasksRepositoryComponent}.
+ * TasksRepositoryComponent}.
  */
 @Module
 public final class ApplicationModule {

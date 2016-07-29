@@ -1,7 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.statistics;
 
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepositoryComponent;
+import com.example.android.architecture.blueprints.todoapp.TasksRepositoryComponent;
 import com.example.android.architecture.blueprints.todoapp.util.FragmentScoped;
 
 import dagger.Component;

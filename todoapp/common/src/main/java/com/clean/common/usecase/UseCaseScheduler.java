@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.architecture.blueprints.todoapp;
-
-import com.clean.common.usecase.UseCase;
+package com.clean.common.usecase;
 
 /**
  * Interface for schedulers, see {@link UseCaseThreadPoolScheduler}.

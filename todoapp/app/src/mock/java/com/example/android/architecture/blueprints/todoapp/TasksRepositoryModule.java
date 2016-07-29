@@ -1,13 +1,13 @@
-package com.example.android.architecture.blueprints.todoapp.data.source;
+package com.example.android.architecture.blueprints.todoapp;
 
 import android.content.Context;
 
+import com.example.android.architecture.blueprints.todoapp.data.FakeTasksRemoteDataSource;
 import com.repository.task.data.Local;
 import com.repository.task.data.Remote;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
 import com.repository.task.data.local.TasksLocalDataSource;
-import com.repository.task.data.remote.TasksRemoteDataSource;
 
 import javax.inject.Singleton;
 
@@ -31,7 +31,7 @@ public class TasksRepositoryModule {
     @Provides
     @Remote
     TasksDataSource provideTasksRemoteDataSource() {
-        return new TasksRemoteDataSource();
+        return new FakeTasksRemoteDataSource();
     }
 
 }

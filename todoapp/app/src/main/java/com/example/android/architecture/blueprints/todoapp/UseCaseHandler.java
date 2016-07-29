@@ -19,6 +19,7 @@ package com.example.android.architecture.blueprints.todoapp;
 
 import com.clean.common.usecase.UseCase;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
+import com.clean.common.usecase.UseCaseScheduler;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

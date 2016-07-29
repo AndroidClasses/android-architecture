@@ -19,6 +19,7 @@ package com.example.android.architecture.blueprints.todoapp;
 import android.os.Handler;
 
 import com.clean.common.usecase.UseCase;
+import com.clean.common.usecase.UseCaseScheduler;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;

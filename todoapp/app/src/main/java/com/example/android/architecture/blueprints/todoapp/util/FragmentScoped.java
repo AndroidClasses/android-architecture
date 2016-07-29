@@ -1,6 +1,6 @@
 package com.example.android.architecture.blueprints.todoapp.util;
 
-import com.example.android.architecture.blueprints.todoapp.data.source.TasksRepositoryComponent;
+import com.example.android.architecture.blueprints.todoapp.TasksRepositoryComponent;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
