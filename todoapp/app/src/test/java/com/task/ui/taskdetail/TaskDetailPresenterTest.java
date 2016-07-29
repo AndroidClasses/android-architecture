@@ -25,6 +25,8 @@ import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
 import com.task.domain.usecase.ActivateTask;
 import com.task.domain.usecase.CompleteTask;
+import com.task.ui.mvp.taskdetail.TaskDetailContract;
+import com.task.ui.mvp.taskdetail.TaskDetailPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

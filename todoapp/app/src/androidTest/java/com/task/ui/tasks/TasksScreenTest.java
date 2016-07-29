@@ -51,6 +51,7 @@ import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.TestUtils;
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
 import com.repository.task.data.TasksDataSource;
+import com.task.ui.mvp.tasks.TasksActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

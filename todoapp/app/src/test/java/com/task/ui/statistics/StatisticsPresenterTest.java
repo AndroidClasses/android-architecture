@@ -23,6 +23,8 @@ import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
 import com.task.domain.usecase.GetStatistics;
 import com.google.common.collect.Lists;
+import com.task.ui.mvp.statistics.StatisticsContract;
+import com.task.ui.mvp.statistics.StatisticsPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

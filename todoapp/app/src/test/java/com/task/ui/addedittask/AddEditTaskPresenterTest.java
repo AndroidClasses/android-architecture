@@ -23,6 +23,8 @@ import com.task.domain.usecase.SaveTask;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
+import com.task.ui.mvp.addedittask.AddEditTaskContract;
+import com.task.ui.mvp.addedittask.AddEditTaskPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

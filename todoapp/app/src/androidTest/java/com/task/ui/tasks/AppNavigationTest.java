@@ -23,6 +23,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.Gravity;
 
 import com.example.android.architecture.blueprints.todoapp.R;
+import com.task.ui.mvp.tasks.TasksActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

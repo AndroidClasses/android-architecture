@@ -26,9 +26,8 @@ dependencies {
     compile project(path: ':taskdomain')
     compile project(path: ':uicommon')
 
-//    compile libraries.supportAppCompat
-//    compile libraries.supportDesign
-//    testCompile libraries.junit
+    apt libraries.butterKnifeCompiler
+    compile libraries.butterKnife
 
     // App's dependencies, including test
     compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"

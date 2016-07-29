@@ -28,6 +28,8 @@ import com.task.domain.usecase.CompleteTask;
 import com.task.domain.usecase.GetTasks;
 import com.google.common.collect.Lists;
 import com.task.domain.usecase.filter.TasksFilterType;
+import com.task.ui.mvp.tasks.TasksContract;
+import com.task.ui.mvp.tasks.TasksPresenter;
 
 import org.junit.Before;
 import org.junit.Test;

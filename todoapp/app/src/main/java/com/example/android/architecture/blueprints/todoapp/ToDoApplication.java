@@ -4,11 +4,14 @@ import android.app.Application;
 
 import com.common.ui.app.ApplicationModule;
 import com.common.ui.app.BaseApplication;
-import com.task.ui.addedittask.AddEditTaskComponent;
+import com.task.ui.mvp.addedittask.AddEditTaskComponent;
+import com.task.ui.app.DaggerTasksRepositoryComponent;
 import com.task.ui.app.TaskRepositoryHolder;
-import com.task.ui.statistics.StatisticsComponent;
-import com.task.ui.taskdetail.TaskDetailComponent;
-import com.task.ui.tasks.TasksComponent;
+import com.task.ui.app.TasksRepositoryComponent;
+import com.task.ui.app.TasksRepositoryModule;
+import com.task.ui.mvp.statistics.StatisticsComponent;
+import com.task.ui.mvp.taskdetail.TaskDetailComponent;
+import com.task.ui.mvp.tasks.TasksComponent;
 
 /**
  * Even though Dagger2 allows annotating a {@link dagger.Component} as a singleton, the code itself
@@ -38,6 +41,7 @@ public class ToDoApplication extends BaseApplication implements TaskRepositoryHo
                 .tasksRepositoryModule(new TasksRepositoryModule()).build();
     }
 
+    @Override
     public TasksRepositoryComponent getTasksRepositoryComponent() {
         return mRepositoryComponent;
     }

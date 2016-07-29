@@ -32,23 +32,23 @@ android {
         }
     }
 
-    // If you need to add more flavors, consider using flavor dimensions.
-    productFlavors {
-        mock {
-            applicationIdSuffix = ".mock"
-        }
-        prod {
-
-        }
-    }
-
-    // Remove mockRelease as it's not needed.
-    android.variantFilter { variant ->
-        if(variant.buildType.name.equals('release')
-                && variant.getFlavors().get(0).name.equals('mock')) {
-            variant.setIgnore(true);
-        }
-    }
+//    // If you need to add more flavors, consider using flavor dimensions.
+//    productFlavors {
+//        mock {
+//            applicationIdSuffix = ".mock"
+//        }
+//        prod {
+//
+//        }
+//    }
+//
+//    // Remove mockRelease as it's not needed.
+//    android.variantFilter { variant ->
+//        if(variant.buildType.name.equals('release')
+//                && variant.getFlavors().get(0).name.equals('mock')) {
+//            variant.setIgnore(true);
+//        }
+//    }
 
     // Always show the result of every unit test, even if it passes.
     testOptions.unitTests.all {
@@ -73,10 +73,10 @@ dependencies {
 
     compile libraries.guava
 
-    // Dagger dependencies
     apt libraries.butterKnifeCompiler
     compile libraries.butterKnife
 
+    // Dagger dependencies
     apt libraries.daggerCompiler
     provided libraries.javaxAnnotation
     compile libraries.dagger
