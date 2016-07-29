@@ -16,18 +16,17 @@
 
 package com.task.ui.tasks;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.NavigationView;
 import android.support.test.espresso.IdlingResource;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.common.ui.util.ActivityUtils;
 import com.common.ui.util.EspressoIdlingResource;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.task.domain.usecase.filter.TasksFilterType;
@@ -51,8 +50,24 @@ public class TasksActivity extends BaseTaskActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
-        ButterKnife.bind(this);
+    }
 
+    @Override
+    protected void onFragmentAddAfter(Fragment fragment) {
+        if (fragment instanceof TasksContract.View) {
+            TasksContract.View view = (TasksContract.View) fragment;
+            // Create the presenter
+            DaggerTasksComponent.builder()
+                    .tasksRepositoryComponent(getTasksRepositoryComponent())
+                    .tasksPresenterModule(new TasksPresenterModule(view)).build()
+                    .inject(this);
+        } else {
+            throw new IllegalStateException("Invalid TasksContract.View instance");
+        }
+    }
+
+    @Override
+    protected void onFragmentAddBefore() {
         // Set up the toolbar.
         Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,27 +76,21 @@ public class TasksActivity extends BaseTaskActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         // Set up the navigation drawer.
-//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        TasksFragment tasksFragment =
-                (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-        if (tasksFragment == null) {
-            // Create the fragment
-            tasksFragment = TasksFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
-        }
+    }
 
-        // Create the presenter
-        DaggerTasksComponent.builder()
-                .tasksRepositoryComponent(getTasksRepositoryComponent())
-                .tasksPresenterModule(new TasksPresenterModule(tasksFragment)).build()
-                .inject(this);
+    @Override
+    protected Fragment newFragmentInstance() {
+        return TasksFragment.newInstance();
+    }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         // Load previously saved state, if available.
         if (savedInstanceState != null) {
             TasksFilterType currentFiltering =
@@ -118,11 +127,7 @@ public class TasksActivity extends BaseTaskActivity {
                                 // Do nothing, we're already on that screen
                                 break;
                             case R.id.statistics_navigation_menu_item:
-                                Intent intent =
-                                        new Intent(TasksActivity.this, StatisticsActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                        | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                startActivity(StatisticsActivity.class);
                                 break;
                             default:
                                 break;

@@ -19,10 +19,10 @@ package com.task.ui.addedittask;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import com.common.ui.util.ActivityUtils;
 import com.common.ui.util.EspressoIdlingResource;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.task.ui.BaseTaskActivity;
@@ -44,43 +44,51 @@ public class AddEditTaskActivity extends BaseTaskActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask_act);
-        ButterKnife.bind(this);
+    }
 
+    @Override
+    protected void onFragmentAddAfter(Fragment fragment) {
+        if (fragment instanceof AddEditTaskFragment) {
+            AddEditTaskFragment addEditTaskFragment = (AddEditTaskFragment) fragment;
+
+            String taskId = null;
+
+            if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
+                taskId = getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
+                Bundle bundle = new Bundle();
+                bundle.putString(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+                addEditTaskFragment.setArguments(bundle);
+            }
+
+            // Create the presenter
+            DaggerAddEditTaskComponent.builder()
+                    .addEditTaskPresenterModule(
+                            new AddEditTaskPresenterModule(addEditTaskFragment, taskId))
+                    .tasksRepositoryComponent(getTasksRepositoryComponent()).build()
+                    .inject(this);
+        } else {
+            throw new IllegalStateException("Invalid AddEditTaskFragment instance");
+        }
+    }
+
+    @Override
+    protected void onFragmentAddBefore() {
         // Set up the toolbar.
         Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-
-        AddEditTaskFragment addEditTaskFragment =
-                (AddEditTaskFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
-
-        String taskId = null;
-        if (addEditTaskFragment == null) {
-            addEditTaskFragment = AddEditTaskFragment.newInstance();
-
-            if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
-                taskId = getIntent().getStringExtra(
-                        AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
-                actionBar.setTitle(R.string.edit_task);
-                Bundle bundle = new Bundle();
-                bundle.putString(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
-                addEditTaskFragment.setArguments(bundle);
-            } else {
-                actionBar.setTitle(R.string.add_task);
-            }
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    addEditTaskFragment, R.id.contentFrame);
+        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
+            actionBar.setTitle(R.string.edit_task);
+        } else {
+            actionBar.setTitle(R.string.add_task);
         }
+    }
 
-        // Create the presenter
-        DaggerAddEditTaskComponent.builder()
-                .addEditTaskPresenterModule(
-                        new AddEditTaskPresenterModule(addEditTaskFragment, taskId))
-                .tasksRepositoryComponent(getTasksRepositoryComponent()).build()
-                .inject(this);
+    @Override
+    protected Fragment newFragmentInstance() {
+        return AddEditTaskFragment.newInstance();
     }
 
     @Override

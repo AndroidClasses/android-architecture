@@ -19,10 +19,10 @@ package com.task.ui.taskdetail;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
-import com.common.ui.util.ActivityUtils;
 import com.common.ui.util.EspressoIdlingResource;
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.task.ui.BaseTaskActivity;
@@ -45,8 +45,27 @@ public class TaskDetailActivity extends BaseTaskActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.taskdetail_act);
-        ButterKnife.bind(this);
+    }
 
+    @Override
+    protected void onFragmentAddAfter(Fragment fragment) {
+        if (fragment instanceof TaskDetailContract.View) {
+            TaskDetailContract.View view = (TaskDetailContract.View) fragment;
+            // Get the requested task id
+            String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
+
+            // Create the presenter
+            DaggerTaskDetailComponent.builder()
+                    .taskDetailPresenterModule(new TaskDetailPresenterModule(view, taskId))
+                    .tasksRepositoryComponent(getTasksRepositoryComponent()).build()
+                    .inject(this);
+        } else {
+            throw new IllegalStateException("Invalid TaskDetailContract.View instance");
+        }
+    }
+
+    @Override
+    protected void onFragmentAddBefore() {
         // Set up the toolbar.
         Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,24 +73,13 @@ public class TaskDetailActivity extends BaseTaskActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
+    }
+
+    @Override
+    protected Fragment newFragmentInstance() {
         // Get the requested task id
         String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
-
-        TaskDetailFragment taskDetailFragment = (TaskDetailFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
-
-        if (taskDetailFragment == null) {
-            taskDetailFragment = TaskDetailFragment.newInstance(taskId);
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    taskDetailFragment, R.id.contentFrame);
-        }
-
-        // Create the presenter
-        DaggerTaskDetailComponent.builder()
-                .taskDetailPresenterModule(new TaskDetailPresenterModule(taskDetailFragment, taskId))
-                .tasksRepositoryComponent(getTasksRepositoryComponent()).build()
-                .inject(this);
+        return TaskDetailFragment.newInstance(taskId);
     }
 
     @Override
