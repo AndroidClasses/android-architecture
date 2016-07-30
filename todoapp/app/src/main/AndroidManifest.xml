@@ -34,9 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.task.ui.mvp.taskdetail.TaskDetailActivity" />
-        <activity android:name="com.task.ui.mvp.addedittask.AddEditTaskActivity" />
-        <activity android:name="com.task.ui.mvp.statistics.StatisticsActivity" />
     </application>
 
 </manifest>

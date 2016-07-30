@@ -3,7 +3,7 @@ package com.task.ui.mvp;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.common.ui.app.BaseApplication;
+import com.common.ui.app.CommonApplication;
 import com.common.ui.util.ActivityUtils;
 import com.task.ui.R;
 import com.task.ui.app.TaskRepositoryHolder;
@@ -61,7 +61,7 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
     }
 
     protected TasksRepositoryComponent getTasksRepositoryComponent() {
-        BaseApplication app = BaseApplication.get(this);
+        CommonApplication app = CommonApplication.get(this);
         if (app instanceof TaskRepositoryHolder) {
             TaskRepositoryHolder todoApp = (TaskRepositoryHolder) app;
             return todoApp.getTasksRepositoryComponent();
