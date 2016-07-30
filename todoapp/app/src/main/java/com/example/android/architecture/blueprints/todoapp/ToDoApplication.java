@@ -2,13 +2,11 @@ package com.example.android.architecture.blueprints.todoapp;
 
 import android.app.Application;
 
-import com.common.ui.app.ApplicationModule;
-import com.common.ui.app.BaseApplication;
-import com.task.ui.mvp.addedittask.AddEditTaskComponent;
-import com.task.ui.app.DaggerTasksRepositoryComponent;
+import com.common.ui.app.CommonApplication;
 import com.task.ui.app.TaskRepositoryHolder;
 import com.task.ui.app.TasksRepositoryComponent;
-import com.task.ui.app.TasksRepositoryModule;
+import com.task.ui.app.TasksRepositoryComponentInstance;
+import com.task.ui.mvp.addedittask.AddEditTaskComponent;
 import com.task.ui.mvp.statistics.StatisticsComponent;
 import com.task.ui.mvp.taskdetail.TaskDetailComponent;
 import com.task.ui.mvp.tasks.TasksComponent;
@@ -28,7 +26,7 @@ import com.task.ui.mvp.tasks.TasksComponent;
  * completed and deleting it<BR />
  * {@link StatisticsComponent}: viewing statistics about your to do items<BR />
  */
-public class ToDoApplication extends BaseApplication implements TaskRepositoryHolder {
+public class ToDoApplication extends CommonApplication implements TaskRepositoryHolder {
 
     private TasksRepositoryComponent mRepositoryComponent;
 
@@ -36,9 +34,7 @@ public class ToDoApplication extends BaseApplication implements TaskRepositoryHo
     public void onCreate() {
         super.onCreate();
 
-        mRepositoryComponent = DaggerTasksRepositoryComponent.builder()
-                .applicationModule(new ApplicationModule(getApplicationContext()))
-                .tasksRepositoryModule(new TasksRepositoryModule()).build();
+        mRepositoryComponent = TasksRepositoryComponentInstance.instanceComponent(this);
     }
 
     @Override

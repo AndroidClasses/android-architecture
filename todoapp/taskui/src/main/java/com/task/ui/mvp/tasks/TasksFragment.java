@@ -42,6 +42,7 @@ import android.widget.TextView;
 import com.common.ui.view.ScrollChildSwipeRefreshLayout;
 import com.repository.task.model.Task;
 import com.task.domain.usecase.filter.TasksFilterType;
+import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 import com.task.ui.mvp.taskdetail.TaskDetailActivity;
@@ -308,7 +309,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @Override
     public void showAddTask() {
         Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
-        startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
+        startActivityForResult(intent, Constants.REQUEST_ADD_TASK);
     }
 
     @Override

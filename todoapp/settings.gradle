@@ -1,6 +1,15 @@
+// light wrapper for targets domain within an Android Application.
 include ':app'
-include ':common'
-include ':taskrepository'
-include ':taskdomain'
+
+// modules involves android framework begin, include presenter and view of
+// MVP pattern for each domain and 'uicommon' for all domain
 include ':taskui'
 include ':uicommon'
+
+// modules without android framework begin, include
+// entities and use cases layer of clean architectures for each domain
+include ':taskdomain'
+include ':taskrepository'
+
+// low level common stuff reused across domain
+include ':common'

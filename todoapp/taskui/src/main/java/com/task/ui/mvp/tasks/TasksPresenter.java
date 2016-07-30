@@ -28,7 +28,7 @@ import com.task.domain.usecase.ClearCompleteTasks;
 import com.task.domain.usecase.CompleteTask;
 import com.task.domain.usecase.GetTasks;
 import com.task.domain.usecase.filter.TasksFilterType;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
+import com.task.ui.Constants;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ final public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void result(int requestCode, int resultCode) {
         // If a task was successfully added, show snackbar
-        if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode
+        if (Constants.REQUEST_ADD_TASK == requestCode
                 && Activity.RESULT_OK == resultCode) {
             mTasksView.showSuccessfullySavedMessage();
         }

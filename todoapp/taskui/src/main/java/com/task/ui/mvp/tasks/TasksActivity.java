@@ -18,39 +18,31 @@ package com.task.ui.mvp.tasks;
 
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
-import android.support.design.widget.NavigationView;
 import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.common.ui.util.EspressoIdlingResource;
 import com.task.domain.usecase.filter.TasksFilterType;
-import com.task.ui.mvp.BaseTaskActivity;
+import com.task.ui.R;
+import com.task.ui.mvp.BaseTaskDrawerActivity;
 import com.task.ui.mvp.statistics.StatisticsActivity;
 
 import javax.inject.Inject;
 
-import com.task.ui.R;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-public class TasksActivity extends BaseTaskActivity {
-
+public class TasksActivity extends BaseTaskDrawerActivity {
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
-
-    private DrawerLayout mDrawerLayout;
 
     @Inject
     TasksPresenter mTasksPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tasks_act);
+    protected int getLayoutResourceId() {
+        return R.layout.tasks_act;
+    }
+
+    @Override
+    protected Fragment newFragmentInstance() {
+        return TasksFragment.newInstance();
     }
 
     @Override
@@ -65,29 +57,6 @@ public class TasksActivity extends BaseTaskActivity {
         } else {
             throw new IllegalStateException("Invalid TasksContract.View instance");
         }
-    }
-
-    @Override
-    protected void onFragmentAddBefore() {
-        // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        // Set up the navigation drawer.
-        mDrawerLayout = ButterKnife.findById(this, R.id.drawer_layout);
-        mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
-        NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
-    }
-
-    @Override
-    protected Fragment newFragmentInstance() {
-        return TasksFragment.newInstance();
     }
 
     @Override
@@ -109,35 +78,13 @@ public class TasksActivity extends BaseTaskActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                // Open the navigation drawer when the home icon is selected from the toolbar.
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
+    protected void invokeNavigationItem(int itemId) {
+        if (itemId == R.id.list_navigation_menu_item) {
+            // Do nothing, we're already on that screen
+        } else if (itemId == R.id.statistics_navigation_menu_item) {
+            startActivity(StatisticsActivity.class);
+        } else {
         }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        int i = menuItem.getItemId();
-                        if (i == R.id.list_navigation_menu_item) {
-                            // Do nothing, we're already on that screen
-                        } else if (i == R.id.statistics_navigation_menu_item) {
-                            startActivity(StatisticsActivity.class);
-
-                        } else {
-                        }
-                        // Close the navigation drawer when an item is selected.
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
     }
 
     @VisibleForTesting

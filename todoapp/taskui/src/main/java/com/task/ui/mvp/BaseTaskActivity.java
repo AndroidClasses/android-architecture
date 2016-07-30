@@ -1,9 +1,10 @@
 package com.task.ui.mvp;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.common.ui.app.BaseApplication;
+import com.common.ui.app.CommonApplication;
 import com.common.ui.util.ActivityUtils;
 import com.task.ui.R;
 import com.task.ui.app.TaskRepositoryHolder;
@@ -23,6 +24,14 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
     private Unbinder unbinder;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutResourceId());
+    }
+
+    protected abstract int getLayoutResourceId();
+
+    @Override
     public void onContentChanged() {
         super.onContentChanged();
 
@@ -34,9 +43,9 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
         onFragmentAddAfter(fragment);
     }
 
-    protected abstract void onFragmentAddAfter(Fragment fragment);
     protected abstract void onFragmentAddBefore();
     protected abstract Fragment newFragmentInstance();
+    protected abstract void onFragmentAddAfter(Fragment fragment);
 
     private Fragment addFragmentToActivity(int fragmentId) {
         Fragment fragment = getSupportFragmentManager().findFragmentById(fragmentId);
@@ -61,7 +70,7 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
     }
 
     protected TasksRepositoryComponent getTasksRepositoryComponent() {
-        BaseApplication app = BaseApplication.get(this);
+        CommonApplication app = CommonApplication.get(this);
         if (app instanceof TaskRepositoryHolder) {
             TaskRepositoryHolder todoApp = (TaskRepositoryHolder) app;
             return todoApp.getTasksRepositoryComponent();

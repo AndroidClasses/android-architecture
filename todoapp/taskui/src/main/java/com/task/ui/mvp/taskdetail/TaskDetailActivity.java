@@ -16,7 +16,6 @@
 
 package com.task.ui.mvp.taskdetail;
 
-import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
@@ -29,7 +28,6 @@ import com.task.ui.mvp.BaseTaskActivity;
 
 import javax.inject.Inject;
 
-import com.task.ui.R;
 import butterknife.ButterKnife;
 
 /**
@@ -43,10 +41,25 @@ public class TaskDetailActivity extends BaseTaskActivity {
     TaskDetailPresenter mTaskDetailPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutResourceId() {
+        return R.layout.taskdetail_act;
+    }
 
-        setContentView(R.layout.taskdetail_act);
+    @Override
+    protected void onFragmentAddBefore() {
+        // Set up the toolbar.
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    protected Fragment newFragmentInstance() {
+        // Get the requested task id
+        String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
+        return TaskDetailFragment.newInstance(taskId);
     }
 
     @Override
@@ -64,24 +77,6 @@ public class TaskDetailActivity extends BaseTaskActivity {
         } else {
             throw new IllegalStateException("Invalid TaskDetailContract.View instance");
         }
-    }
-
-    @Override
-    protected void onFragmentAddBefore() {
-        // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
-
-    }
-
-    @Override
-    protected Fragment newFragmentInstance() {
-        // Get the requested task id
-        String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
-        return TaskDetailFragment.newInstance(taskId);
     }
 
     @Override

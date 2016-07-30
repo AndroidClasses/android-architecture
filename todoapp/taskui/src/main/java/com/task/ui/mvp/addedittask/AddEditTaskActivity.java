@@ -35,16 +35,32 @@ import butterknife.ButterKnife;
  * Displays an add or edit task screen.
  */
 public class AddEditTaskActivity extends BaseTaskActivity {
-
-    public static final int REQUEST_ADD_TASK = 1;
-
     @Inject
     AddEditTaskPresenter mAddEditTasksPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.addtask_act);
+    protected int getLayoutResourceId() {
+        return R.layout.addtask_act;
+    }
+
+    @Override
+    protected void onFragmentAddBefore() {
+        // Set up the toolbar.
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
+            actionBar.setTitle(R.string.edit_task);
+        } else {
+            actionBar.setTitle(R.string.add_task);
+        }
+    }
+
+    @Override
+    protected Fragment newFragmentInstance() {
+        return AddEditTaskFragment.newInstance();
     }
 
     @Override
@@ -70,26 +86,6 @@ public class AddEditTaskActivity extends BaseTaskActivity {
         } else {
             throw new IllegalStateException("Invalid AddEditTaskFragment instance");
         }
-    }
-
-    @Override
-    protected void onFragmentAddBefore() {
-        // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
-        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
-            actionBar.setTitle(R.string.edit_task);
-        } else {
-            actionBar.setTitle(R.string.add_task);
-        }
-    }
-
-    @Override
-    protected Fragment newFragmentInstance() {
-        return AddEditTaskFragment.newInstance();
     }
 
     @Override
