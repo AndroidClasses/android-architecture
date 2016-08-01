@@ -4,7 +4,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.task.ui.R;
@@ -19,14 +18,19 @@ abstract public class BaseTaskDrawerActivity extends BaseTaskActivity {
     private DrawerLayout mDrawerLayout;
 
     @Override
+    protected void customizeActionBar(ActionBar actionBar) {
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
     protected void onFragmentAddBefore() {
         // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-        onActionBarReady(ab);
+//        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        ActionBar ab = getSupportActionBar();
+//        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+//        ab.setDisplayHomeAsUpEnabled(true);
 
         // Set up the navigation drawer.
         mDrawerLayout = ButterKnife.findById(this, R.id.drawer_layout);
@@ -57,7 +61,6 @@ abstract public class BaseTaskDrawerActivity extends BaseTaskActivity {
 
     protected void onActionBarReady(ActionBar ab) {
         // override actionbar property
-        ab.setTitle(R.string.statistics_title);
     }
 
     @Override

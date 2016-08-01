@@ -20,16 +20,12 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 
 import com.common.ui.util.EspressoIdlingResource;
 import com.task.ui.R;
 import com.task.ui.mvp.BaseTaskActivity;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
 
 /**
  * Displays an add or edit task screen.
@@ -44,19 +40,27 @@ public class AddEditTaskActivity extends BaseTaskActivity {
     }
 
     @Override
-    protected void onFragmentAddBefore() {
-        // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+    protected int getCustomizedTitleResId() {
         if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
-            actionBar.setTitle(R.string.edit_task);
+            return R.string.edit_task;
         } else {
-            actionBar.setTitle(R.string.add_task);
+            return R.string.add_task;
         }
     }
+
+//    protected void onFragmentAddBefore() {
+//        // Set up the toolbar.
+//        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
+//            actionBar.setTitle(R.string.edit_task);
+//        } else {
+//            actionBar.setTitle(R.string.add_task);
+//        }
+//    }
 
     @Override
     protected Fragment newFragmentInstance() {

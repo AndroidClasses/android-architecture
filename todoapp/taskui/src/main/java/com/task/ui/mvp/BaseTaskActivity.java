@@ -2,7 +2,9 @@ package com.task.ui.mvp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.common.ui.app.CommonApplication;
 import com.common.ui.util.ActivityUtils;
@@ -38,12 +40,33 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
         tryUnbind();
         unbinder = ButterKnife.bind(this);
 
+        // Set up the toolbar.
+        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        int titleId = getCustomizedTitleResId();
+        if (titleId != 0) {
+            actionBar.setTitle(titleId);
+        }
+        customizeActionBar(actionBar);
+
         onFragmentAddBefore();
         Fragment fragment = addFragmentToActivity(R.id.contentFrame);
         onFragmentAddAfter(fragment);
     }
 
-    protected abstract void onFragmentAddBefore();
+    protected int getCustomizedTitleResId() {
+        return 0;
+    }
+
+    protected void customizeActionBar(ActionBar actionBar) {
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+    }
+
+    protected void onFragmentAddBefore() {
+    }
+
     protected abstract Fragment newFragmentInstance();
     protected abstract void onFragmentAddAfter(Fragment fragment);
 
@@ -72,8 +95,8 @@ abstract public class BaseTaskActivity extends AppCompatActivity {
     protected TasksRepositoryComponent getTasksRepositoryComponent() {
         CommonApplication app = CommonApplication.get(this);
         if (app instanceof TaskRepositoryHolder) {
-            TaskRepositoryHolder todoApp = (TaskRepositoryHolder) app;
-            return todoApp.getTasksRepositoryComponent();
+            TaskRepositoryHolder repositoryHolder = (TaskRepositoryHolder) app;
+            return repositoryHolder.getTasksRepositoryComponent();
         }
         throw new IllegalStateException("It requires TaskRepositoryHolder context instance.");
     }

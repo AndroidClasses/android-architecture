@@ -19,16 +19,12 @@ package com.task.ui.mvp.taskdetail;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 
 import com.common.ui.util.EspressoIdlingResource;
 import com.task.ui.R;
 import com.task.ui.mvp.BaseTaskActivity;
 
 import javax.inject.Inject;
-
-import butterknife.ButterKnife;
 
 /**
  * Displays task details screen.
@@ -42,18 +38,18 @@ public class TaskDetailActivity extends BaseTaskActivity {
 
     @Override
     protected int getLayoutResourceId() {
-        return R.layout.taskdetail_act;
+            return R.layout.taskdetail_act;
     }
 
-    @Override
-    protected void onFragmentAddBefore() {
-        // Set up the toolbar.
-        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setDisplayShowHomeEnabled(true);
-    }
+//    @Override
+//    protected void onFragmentAddBefore() {
+//        // Set up the toolbar.
+//        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        ActionBar ab = getSupportActionBar();
+//        ab.setDisplayHomeAsUpEnabled(true);
+//        ab.setDisplayShowHomeEnabled(true);
+//    }
 
     @Override
     protected Fragment newFragmentInstance() {

@@ -86,7 +86,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
         // Set up floating action button
         FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_edit_task);
-
+        fab.setImageResource(R.drawable.ic_edit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

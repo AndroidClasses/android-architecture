@@ -14,26 +14,15 @@
   ~ limitations under the License.
   -->
 
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
+<!-- Navigation Drawer -->
+<android.support.design.widget.NavigationView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_view"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="com.task.ui.mvp.tasks.TasksActivity"
-    tools:openDrawer="start">
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    app:headerLayout="@layout/nav_header"
+    app:menu="@menu/drawer_actions" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/including_toolbar" />
-
-
-        <include layout="@layout/including_fragment_placeholder" />
-
-    </LinearLayout>
-
-    <include layout="@layout/including_navigation_drawer" />
-
-</android.support.v4.widget.DrawerLayout>

@@ -17,7 +17,6 @@
 package com.task.ui.mvp.statistics;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 
 import com.task.ui.R;
 import com.task.ui.mvp.BaseTaskDrawerActivity;
@@ -66,8 +65,8 @@ public class StatisticsActivity extends BaseTaskDrawerActivity {
     }
 
     @Override
-    protected void onActionBarReady(ActionBar ab) {
-        // override actionbar property
-        ab.setTitle(R.string.statistics_title);
+    protected int getCustomizedTitleResId() {
+        // override title
+        return R.string.statistics_title;
     }
 }
