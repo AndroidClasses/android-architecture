@@ -2,11 +2,11 @@
     package="com.task.ui">
 
     <application >
-        <activity android:name=".mvp.tasks.TasksBaseActivity">
+        <activity android:name=".mvp.tasks.TasksActivity">
         </activity>
-        <activity android:name=".mvp.taskdetail.TaskDetailBaseActivity" />
-        <activity android:name=".mvp.addedittask.AddEditTaskBaseActivity" />
-        <activity android:name=".mvp.statistics.StatisticsBaseActivity" />
+        <activity android:name=".mvp.taskdetail.TaskDetailActivity" />
+        <activity android:name=".mvp.addedittask.AddEditTaskActivity" />
+        <activity android:name=".mvp.statistics.StatisticsActivity" />
     </application>
 
 </manifest>

@@ -32,10 +32,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskBaseFragment;
-import com.task.ui.mvp.addedittask.AddEditTaskBaseActivity;
-import com.task.ui.mvp.addedittask.AddEditTaskFragment;
+import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -43,10 +43,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Main UI for the task detail screen.
  */
 public class TaskDetailFragment extends TaskBaseFragment implements TaskDetailContract.View {
-
-    public static final String ARGUMENT_TASK_ID = "TASK_ID";
-
-    public static final int REQUEST_EDIT_TASK = 1;
+    private static final int REQUEST_EDIT_TASK = 1;
 
     private TaskDetailContract.Presenter mPresenter;
 
@@ -58,7 +55,7 @@ public class TaskDetailFragment extends TaskBaseFragment implements TaskDetailCo
 
     public static TaskDetailFragment newInstance(String taskId) {
         Bundle arguments = new Bundle();
-        arguments.putString(ARGUMENT_TASK_ID, taskId);
+        arguments.putString(Constants.EXTRA_TASK_ID, taskId);
         TaskDetailFragment fragment = new TaskDetailFragment();
         fragment.setArguments(arguments);
         return fragment;
@@ -153,8 +150,8 @@ public class TaskDetailFragment extends TaskBaseFragment implements TaskDetailCo
 
     @Override
     public void showEditTask(String taskId) {
-        Intent intent = new Intent(getContext(), AddEditTaskBaseActivity.class);
-        intent.putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        intent.putExtra(Constants.ARGUMENT_EDIT_TASK_ID, taskId);
         startActivityForResult(intent, REQUEST_EDIT_TASK);
     }
 

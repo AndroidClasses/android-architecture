@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mvp.taskdetail.TaskDetailBaseActivity">
+    tools:context=".mvp.taskdetail.TaskDetailActivity">
 
     <include layout="@layout/including_toolbar" />
 

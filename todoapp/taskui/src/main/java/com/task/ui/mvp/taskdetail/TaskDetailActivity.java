@@ -21,6 +21,7 @@ import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 
 import com.common.ui.util.EspressoIdlingResource;
+import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskBaseActivity;
 
@@ -29,9 +30,7 @@ import javax.inject.Inject;
 /**
  * Displays task details screen.
  */
-public class TaskDetailBaseActivity extends TaskBaseActivity {
-
-    public static final String EXTRA_TASK_ID = "TASK_ID";
+public class TaskDetailActivity extends TaskBaseActivity {
 
     @Inject
     TaskDetailPresenter mTaskDetailPresenter;
@@ -54,7 +53,7 @@ public class TaskDetailBaseActivity extends TaskBaseActivity {
     @Override
     protected Fragment newFragmentInstance() {
         // Get the requested task id
-        String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
+        String taskId = getIntent().getStringExtra(Constants.EXTRA_TASK_ID);
         return TaskDetailFragment.newInstance(taskId);
     }
 
@@ -63,7 +62,7 @@ public class TaskDetailBaseActivity extends TaskBaseActivity {
         if (fragment instanceof TaskDetailContract.View) {
             TaskDetailContract.View view = (TaskDetailContract.View) fragment;
             // Get the requested task id
-            String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
+            String taskId = getIntent().getStringExtra(Constants.EXTRA_TASK_ID);
 
             // Create the presenter
             DaggerTaskDetailComponent.builder()

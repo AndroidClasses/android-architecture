@@ -25,11 +25,11 @@ import com.common.ui.util.EspressoIdlingResource;
 import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskDrawerBaseActivity;
-import com.task.ui.mvp.statistics.StatisticsBaseActivity;
+import com.task.ui.mvp.statistics.StatisticsActivity;
 
 import javax.inject.Inject;
 
-public class TasksBaseActivity extends TaskDrawerBaseActivity {
+public class TasksActivity extends TaskDrawerBaseActivity {
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
 
     @Inject
@@ -82,7 +82,7 @@ public class TasksBaseActivity extends TaskDrawerBaseActivity {
         if (itemId == R.id.list_navigation_menu_item) {
             // Do nothing, we're already on that screen
         } else if (itemId == R.id.statistics_navigation_menu_item) {
-            startActivity(StatisticsBaseActivity.class);
+            startActivity(StatisticsActivity.class);
         } else {
         }
     }

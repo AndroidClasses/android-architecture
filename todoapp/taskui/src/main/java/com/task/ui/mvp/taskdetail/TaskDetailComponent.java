@@ -17,6 +17,6 @@ import dagger.Component;
 @Component(dependencies = TasksRepositoryComponent.class, modules = TaskDetailPresenterModule.class)
 public interface TaskDetailComponent {
     
-    void inject(TaskDetailBaseActivity taskDetailActivity);
+    void inject(TaskDetailActivity taskDetailActivity);
 }
 

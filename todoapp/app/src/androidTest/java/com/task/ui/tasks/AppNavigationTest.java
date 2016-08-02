@@ -23,7 +23,7 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.Gravity;
 
 import com.clean.aar.R;
-import com.task.ui.mvp.tasks.TasksBaseActivity;
+import com.task.ui.mvp.tasks.TasksActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,7 +41,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.example.aar.custom.action.NavigationViewActions.navigateTo;
 
 /**
- * Tests for the {@link DrawerLayout} layout component in {@link TasksBaseActivity} which manages
+ * Tests for the {@link DrawerLayout} layout component in {@link TasksActivity} which manages
  * navigation within the app.
  */
 @RunWith(AndroidJUnit4.class)
@@ -56,8 +56,8 @@ public class AppNavigationTest {
      * blocks of Junit tests.
      */
     @Rule
-    public ActivityTestRule<TasksBaseActivity> mActivityTestRule =
-            new ActivityTestRule<>(TasksBaseActivity.class);
+    public ActivityTestRule<TasksActivity> mActivityTestRule =
+            new ActivityTestRule<>(TasksActivity.class);
 
     @Test
     public void clickOnStatisticsNavigationItem_ShowsStatisticsScreen() {

@@ -20,14 +20,14 @@ import android.support.v4.app.Fragment;
 
 import com.task.ui.R;
 import com.task.ui.mvp.TaskDrawerBaseActivity;
-import com.task.ui.mvp.tasks.TasksBaseActivity;
+import com.task.ui.mvp.tasks.TasksActivity;
 
 import javax.inject.Inject;
 
 /**
  * Show statistics for tasks.
  */
-public class StatisticsBaseActivity extends TaskDrawerBaseActivity {
+public class StatisticsActivity extends TaskDrawerBaseActivity {
     @Inject
     StatisticsPresenter mStatiticsPresenter;
 
@@ -57,7 +57,7 @@ public class StatisticsBaseActivity extends TaskDrawerBaseActivity {
     @Override
     protected void invokeNavigationItem(int itemId) {
         if (itemId == R.id.list_navigation_menu_item) {
-            startActivity(TasksBaseActivity.class);
+            startActivity(TasksActivity.class);
         } else if (itemId == R.id.statistics_navigation_menu_item) {
             // Do nothing, we're already on that screen
         } else {

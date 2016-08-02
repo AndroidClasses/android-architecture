@@ -28,7 +28,7 @@ import com.clean.aar.CleanAarApplication;
 import com.clean.aar.R;
 import com.example.aar.TestUtils;
 import com.repository.task.data.TasksDataSource;
-import com.task.ui.mvp.tasks.TasksBaseActivity;
+import com.task.ui.mvp.tasks.TasksActivity;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -78,8 +78,8 @@ public class TasksScreenTest {
      * blocks of Junit tests.
      */
     @Rule
-    public ActivityTestRule<TasksBaseActivity> mTasksActivityTestRule =
-            new ActivityTestRule<TasksBaseActivity>(TasksBaseActivity.class) {
+    public ActivityTestRule<TasksActivity> mTasksActivityTestRule =
+            new ActivityTestRule<TasksActivity>(TasksActivity.class) {
 
                 /**
                  * To avoid a long list of tasks and the need to scroll through the list to find a

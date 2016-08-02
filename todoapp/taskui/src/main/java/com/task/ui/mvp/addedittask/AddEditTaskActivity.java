@@ -22,6 +22,7 @@ import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 
 import com.common.ui.util.EspressoIdlingResource;
+import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskBaseActivity;
 
@@ -30,7 +31,7 @@ import javax.inject.Inject;
 /**
  * Displays an add or edit task screen.
  */
-public class AddEditTaskBaseActivity extends TaskBaseActivity {
+public class AddEditTaskActivity extends TaskBaseActivity {
     @Inject
     AddEditTaskPresenter mAddEditTasksPresenter;
 
@@ -41,7 +42,7 @@ public class AddEditTaskBaseActivity extends TaskBaseActivity {
 
     @Override
     protected int getActivityTitleResId() {
-        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
+        if (getIntent().hasExtra(Constants.ARGUMENT_EDIT_TASK_ID)) {
             return R.string.edit_task;
         } else {
             return R.string.add_task;
@@ -74,10 +75,10 @@ public class AddEditTaskBaseActivity extends TaskBaseActivity {
 
             String taskId = null;
 
-            if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
-                taskId = getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
+            if (getIntent().hasExtra(Constants.ARGUMENT_EDIT_TASK_ID)) {
+                taskId = getIntent().getStringExtra(Constants.ARGUMENT_EDIT_TASK_ID);
                 Bundle bundle = new Bundle();
-                bundle.putString(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
+                bundle.putString(Constants.ARGUMENT_EDIT_TASK_ID, taskId);
                 addEditTaskFragment.setArguments(bundle);
             }
 
