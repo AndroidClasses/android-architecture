@@ -19,7 +19,6 @@ package com.task.ui.mvp.tasks;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 
-import com.clean.common.usecase.UseCase;
 import com.common.ui.app.UseCaseHandler;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.model.Task;
@@ -29,6 +28,7 @@ import com.task.domain.usecase.CompleteTask;
 import com.task.domain.usecase.GetTasks;
 import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.Constants;
+import com.task.ui.mvp.TaskBasePresenter;
 
 import java.util.List;
 
@@ -49,11 +49,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * therefore, to ensure the developer doesn't instantiate the class manually and bypasses Dagger,
  * it's good practice minimise the visibility of the class/constructor as much as possible.
  **/
-final public class TasksPresenter implements TasksContract.Presenter {
+final public class TasksPresenter extends TaskBasePresenter implements TasksContract.Presenter {
 
     private final TasksContract.View mTasksView;
 
-    private final UseCaseHandler mUseCaseHandler;
     private final GetTasks mGetTasks;
     private final CompleteTask mCompleteTask;
     private final ActivateTask mActivateTask;
@@ -71,8 +70,8 @@ final public class TasksPresenter implements TasksContract.Presenter {
     public TasksPresenter(UseCaseHandler handler, TasksContract.View tasksView,
                    GetTasks getTasks, CompleteTask completeTask,
                    ActivateTask activateTask, ClearCompleteTasks clearCompleteTasks) {
+        super(handler);
         mTasksView = tasksView;
-        mUseCaseHandler = handler;
         mGetTasks = getTasks;
         mCompleteTask = completeTask;
         mActivateTask = activateTask;
@@ -118,34 +117,7 @@ final public class TasksPresenter implements TasksContract.Presenter {
             mTasksView.setLoadingIndicator(true);
         }
 
-        GetTasks.RequestValues requestValue = new GetTasks.RequestValues(forceUpdate,
-                mCurrentFiltering);
-
-        mUseCaseHandler.execute(mGetTasks, requestValue,
-                new UseCase.UseCaseCallback<GetTasks.ResponseValue>() {
-                    @Override
-                    public void onSuccess(GetTasks.ResponseValue response) {
-                        List<Task> tasks = response.getTasks();
-                        // The view may not be able to handle UI updates anymore
-                        if (!mTasksView.isActive()) {
-                            return;
-                        }
-                        if (showLoadingUI) {
-                            mTasksView.setLoadingIndicator(false);
-                        }
-
-                        processTasks(tasks);
-                    }
-
-                    @Override
-                    public void onError() {
-                        // The view may not be able to handle UI updates anymore
-                        if (!mTasksView.isActive()) {
-                            return;
-                        }
-                        mTasksView.showLoadingTasksError();
-                    }
-                });
+        execute(mGetTasks, forceUpdate, mCurrentFiltering, showLoadingUI);
     }
 
     private void processTasks(List<Task> tasks) {
@@ -202,55 +174,18 @@ final public class TasksPresenter implements TasksContract.Presenter {
     @Override
     public void completeTask(@NonNull Task completedTask) {
         checkNotNull(completedTask, "completedTask cannot be null!");
-        mUseCaseHandler.execute(mCompleteTask, new CompleteTask.RequestValues(
-                        completedTask.getId()),
-                new UseCase.UseCaseCallback<CompleteTask.ResponseValue>() {
-                    @Override
-                    public void onSuccess(CompleteTask.ResponseValue response) {
-                        mTasksView.showTaskMarkedComplete();
-                        loadTasks(false, false);
-                    }
-
-                    @Override
-                    public void onError() {
-                        mTasksView.showLoadingTasksError();
-                    }
-                });
+        execute(mCompleteTask, completedTask.getId());
     }
 
     @Override
     public void activateTask(@NonNull Task activeTask) {
         checkNotNull(activeTask, "activeTask cannot be null!");
-        mUseCaseHandler.execute(mActivateTask, new ActivateTask.RequestValues(activeTask.getId()),
-                new UseCase.UseCaseCallback<ActivateTask.ResponseValue>() {
-                    @Override
-                    public void onSuccess(ActivateTask.ResponseValue response) {
-                        mTasksView.showTaskMarkedActive();
-                        loadTasks(false, false);
-                    }
-
-                    @Override
-                    public void onError() {
-                        mTasksView.showLoadingTasksError();
-                    }
-                });
+        execute(mActivateTask, activeTask.getId());
     }
 
     @Override
     public void clearCompletedTasks() {
-        mUseCaseHandler.execute(mClearCompleteTasks, new ClearCompleteTasks.RequestValues(),
-                new UseCase.UseCaseCallback<ClearCompleteTasks.ResponseValue>() {
-                    @Override
-                    public void onSuccess(ClearCompleteTasks.ResponseValue response) {
-                        mTasksView.showCompletedTasksCleared();
-                        loadTasks(false, false);
-                    }
-
-                    @Override
-                    public void onError() {
-                        mTasksView.showLoadingTasksError();
-                    }
-                });
+        execute(mClearCompleteTasks);
     }
 
     /**
@@ -270,4 +205,58 @@ final public class TasksPresenter implements TasksContract.Presenter {
         return mCurrentFiltering;
     }
 
+    @Override
+    protected void successGetTasks(List<Task> tasks, final boolean showLoadingUI) {
+        // The view may not be able to handle UI updates anymore
+        if (!mTasksView.isActive()) {
+            return;
+        }
+        if (showLoadingUI) {
+            mTasksView.setLoadingIndicator(false);
+        }
+
+        processTasks(tasks);
+    }
+
+    @Override
+    protected void errorGetTasks() {
+        // The view may not be able to handle UI updates anymore
+        if (!mTasksView.isActive()) {
+            return;
+        }
+        mTasksView.showLoadingTasksError();
+    }
+
+    @Override
+    protected void successCompleteTask() {
+        mTasksView.showTaskMarkedComplete();
+        loadTasks(false, false);
+    }
+
+    @Override
+    protected void errorCompleteTask() {
+        mTasksView.showLoadingTasksError();
+    }
+
+    @Override
+    protected void successActivateTask() {
+        mTasksView.showTaskMarkedActive();
+        loadTasks(false, false);
+    }
+
+    @Override
+    protected void errorActivateTask() {
+        mTasksView.showLoadingTasksError();
+    }
+
+    @Override
+    protected void errorClearCompletedTasks() {
+        mTasksView.showLoadingTasksError();
+    }
+
+    @Override
+    protected void successClearCompletedTasks() {
+        mTasksView.showCompletedTasksCleared();
+        loadTasks(false, false);
+    }
 }

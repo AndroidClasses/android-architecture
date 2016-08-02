@@ -20,15 +20,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.task.ui.R;
+import com.task.ui.mvp.TaskBaseFragment;
 
 import butterknife.ButterKnife;
 
@@ -37,7 +36,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Main UI for the add task screen. Users can enter a task title and description.
  */
-public class AddEditTaskFragment extends Fragment implements AddEditTaskContract.View {
+public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTaskContract.View {
 
     public static final String ARGUMENT_EDIT_TASK_ID = "EDIT_TASK_ID";
 
@@ -70,9 +69,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_edit_task_done);
-        fab.setImageResource(R.drawable.ic_done);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setFloatingActionButton(R.id.fab_edit_task_done, R.drawable.ic_done, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.saveTask(mTitle.getText().toString(), mDescription.getText().toString());
@@ -82,8 +79,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
 
         mTitle = ButterKnife.findById(root, R.id.add_task_title);

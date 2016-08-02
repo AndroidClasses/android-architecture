@@ -51,8 +51,7 @@ public class StatisticsFragment extends Fragment implements StatisticsContract.V
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.statistics_frag, container, false);
         mStatisticsTV = ButterKnife.findById(root, R.id.statistics);
         return root;

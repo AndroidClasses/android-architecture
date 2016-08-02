@@ -20,41 +20,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.task.ui.mvp.taskdetail.TaskDetailActivity">
+    tools:context=".mvp.taskdetail.TaskDetailBaseActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/Toolbar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/including_toolbar" />
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/contentFrame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <include layout="@layout/including_fragment_placeholder" />
 
-        <android.support.design.widget.FloatingActionButton
+        <include layout="@layout/including_float_actionbar"
             android:id="@+id/fab_edit_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_edit"
-            app:fabSize="normal"
-            app:layout_anchor="@id/contentFrame"
-            app:layout_anchorGravity="bottom|right|end" />
+            />
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--style="@style/FloatActionBar"-->
+            <!--android:id="@+id/fab_edit_task"-->
+            <!--android:src="@drawable/ic_edit"-->
+            <!--app:fabSize="normal"-->
+            <!--app:layout_anchorGravity="bottom|right|end"-->
+            <!--app:layout_anchor="@id/contentFrame"/>-->
 
     </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

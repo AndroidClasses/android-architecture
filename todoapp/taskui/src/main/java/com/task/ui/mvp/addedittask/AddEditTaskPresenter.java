@@ -19,11 +19,11 @@ package com.task.ui.mvp.addedittask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.clean.common.usecase.UseCase;
 import com.common.ui.app.UseCaseHandler;
+import com.repository.task.model.Task;
 import com.task.domain.usecase.GetTask;
 import com.task.domain.usecase.SaveTask;
-import com.repository.task.model.Task;
+import com.task.ui.mvp.TaskBasePresenter;
 
 import javax.inject.Inject;
 
@@ -40,7 +40,7 @@ import javax.inject.Inject;
  * therefore, to ensure the developer doesn't instantiate the class manually bypassing Dagger,
  * it's good practice minimise the visibility of the class/constructor as much as possible.
  */
-public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
+public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTaskContract.Presenter {
 
     @NonNull
     private final AddEditTaskContract.View mAddTaskView;
@@ -48,8 +48,6 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
     private final GetTask mGetTask;
 
     private final SaveTask mSaveTask;
-
-    private final UseCaseHandler mUseCaseHandler;
 
     @Nullable
     private String mTaskId;
@@ -62,9 +60,9 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
     public AddEditTaskPresenter(UseCaseHandler useCaseHandler, @Nullable String taskId,
                          AddEditTaskContract.View addTaskView,
                          GetTask getTask, SaveTask saveTask) {
+        super(useCaseHandler);
         mTaskId = taskId;
         mAddTaskView = addTaskView;
-        mUseCaseHandler = useCaseHandler;
         mGetTask = getTask;
         mSaveTask = saveTask;
     }
@@ -100,18 +98,7 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
             throw new RuntimeException("populateTask() was called but task is new.");
         }
 
-        mUseCaseHandler.execute(mGetTask, new GetTask.RequestValues(mTaskId),
-                new UseCase.UseCaseCallback<GetTask.ResponseValue>() {
-                    @Override
-                    public void onSuccess(GetTask.ResponseValue response) {
-                        showTask(response.getTask());
-                    }
-
-                    @Override
-                    public void onError() {
-                        showEmptyTaskError();
-                    }
-                });
+        execute(mGetTask, mTaskId);
     }
 
     private void showTask(Task task) {
@@ -142,18 +129,7 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
         if (newTask.isEmpty()) {
             mAddTaskView.showEmptyTaskError();
         } else {
-            mUseCaseHandler.execute(mSaveTask, new SaveTask.RequestValues(newTask),
-                    new UseCase.UseCaseCallback<SaveTask.ResponseValue>() {
-                        @Override
-                        public void onSuccess(SaveTask.ResponseValue response) {
-                            mAddTaskView.showTasksList();
-                        }
-
-                        @Override
-                        public void onError() {
-                            showSaveError();
-                        }
-                    });
+            execute(mSaveTask, newTask);
         }
     }
 
@@ -161,19 +137,28 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
         if (isNewTask()) {
             throw new RuntimeException("updateTask() was called but task is new.");
         }
-        Task newTask = new Task(title, description, mTaskId);
-        mUseCaseHandler.execute(mSaveTask, new SaveTask.RequestValues(newTask),
-                new UseCase.UseCaseCallback<SaveTask.ResponseValue>() {
-                    @Override
-                    public void onSuccess(SaveTask.ResponseValue response) {
-                        // After an edit, go back to the list.
-                        mAddTaskView.showTasksList();
-                    }
 
-                    @Override
-                    public void onError() {
-                        showSaveError();
-                    }
-                });
+        Task newTask = new Task(title, description, mTaskId);
+        execute(mSaveTask, newTask);
+    }
+
+    @Override
+    protected void successGetTask(Task task) {
+        showTask(task);
+    }
+
+    @Override
+    protected void errorGetTask() {
+        showEmptyTaskError();
+    }
+
+    @Override
+    protected void successSaveTask() {
+        mAddTaskView.showTasksList();
+    }
+
+    @Override
+    protected void errorSaveTask() {
+        showSaveError();
     }
 }

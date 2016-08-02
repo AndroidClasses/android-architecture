@@ -22,7 +22,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.aar.R;
 
 import org.junit.After;
 import org.junit.Before;

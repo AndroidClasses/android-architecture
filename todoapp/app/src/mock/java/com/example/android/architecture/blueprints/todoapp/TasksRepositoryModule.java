@@ -1,8 +1,8 @@
-package com.example.android.architecture.blueprints.todoapp;
+package com.example.aar;
 
 import android.content.Context;
 
-import com.example.android.architecture.blueprints.todoapp.data.FakeTasksRemoteDataSource;
+import com.example.aar.data.FakeTasksRemoteDataSource;
 import com.repository.task.data.Local;
 import com.repository.task.data.Remote;
 import com.repository.task.data.TasksDataSource;

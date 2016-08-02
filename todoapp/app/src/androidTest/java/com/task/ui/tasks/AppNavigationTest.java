@@ -22,8 +22,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.Gravity;
 
-import com.example.android.architecture.blueprints.todoapp.R;
-import com.task.ui.mvp.tasks.TasksActivity;
+import com.clean.aar.R;
+import com.task.ui.mvp.tasks.TasksBaseActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -38,10 +38,10 @@ import static android.support.test.espresso.contrib.DrawerMatchers.isOpen;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.example.android.architecture.blueprints.todoapp.custom.action.NavigationViewActions.navigateTo;
+import static com.example.aar.custom.action.NavigationViewActions.navigateTo;
 
 /**
- * Tests for the {@link DrawerLayout} layout component in {@link TasksActivity} which manages
+ * Tests for the {@link DrawerLayout} layout component in {@link TasksBaseActivity} which manages
  * navigation within the app.
  */
 @RunWith(AndroidJUnit4.class)
@@ -56,8 +56,8 @@ public class AppNavigationTest {
      * blocks of Junit tests.
      */
     @Rule
-    public ActivityTestRule<TasksActivity> mActivityTestRule =
-            new ActivityTestRule<>(TasksActivity.class);
+    public ActivityTestRule<TasksBaseActivity> mActivityTestRule =
+            new ActivityTestRule<>(TasksBaseActivity.class);
 
     @Test
     public void clickOnStatisticsNavigationItem_ShowsStatisticsScreen() {

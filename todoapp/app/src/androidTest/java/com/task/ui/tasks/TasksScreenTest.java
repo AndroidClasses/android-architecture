@@ -16,6 +16,27 @@
 
 package com.task.ui.tasks;
 
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.LargeTest;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ListView;
+
+import com.clean.aar.CleanAarApplication;
+import com.clean.aar.R;
+import com.example.aar.TestUtils;
+import com.repository.task.data.TasksDataSource;
+import com.task.ui.mvp.tasks.TasksBaseActivity;
+
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
@@ -33,32 +54,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 import static com.google.common.base.Preconditions.checkArgument;
-
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNot.not;
-
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.LargeTest;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.ListView;
-
-import com.example.android.architecture.blueprints.todoapp.R;
-import com.example.android.architecture.blueprints.todoapp.TestUtils;
-import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.repository.task.data.TasksDataSource;
-import com.task.ui.mvp.tasks.TasksActivity;
-
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * Tests for the tasks screen, the main screen which contains a list of all tasks.
@@ -80,8 +78,8 @@ public class TasksScreenTest {
      * blocks of Junit tests.
      */
     @Rule
-    public ActivityTestRule<TasksActivity> mTasksActivityTestRule =
-            new ActivityTestRule<TasksActivity>(TasksActivity.class) {
+    public ActivityTestRule<TasksBaseActivity> mTasksActivityTestRule =
+            new ActivityTestRule<TasksBaseActivity>(TasksBaseActivity.class) {
 
                 /**
                  * To avoid a long list of tasks and the need to scroll through the list to find a
@@ -91,7 +89,7 @@ public class TasksScreenTest {
                 protected void beforeActivityLaunched() {
                     super.beforeActivityLaunched();
                     // Doing this in @Before generates a race condition.
-                    ((ToDoApplication) InstrumentationRegistry.getTargetContext()
+                    ((CleanAarApplication) InstrumentationRegistry.getTargetContext()
                             .getApplicationContext()).getTasksRepositoryComponent()
                             .getTasksRepository().deleteAllTasks();
                 }

@@ -21,9 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,17 +33,16 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.task.ui.R;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
+import com.task.ui.mvp.TaskBaseFragment;
+import com.task.ui.mvp.addedittask.AddEditTaskBaseActivity;
 import com.task.ui.mvp.addedittask.AddEditTaskFragment;
-
-import butterknife.ButterKnife;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Main UI for the task detail screen.
  */
-public class TaskDetailFragment extends Fragment implements TaskDetailContract.View {
+public class TaskDetailFragment extends TaskBaseFragment implements TaskDetailContract.View {
 
     public static final String ARGUMENT_TASK_ID = "TASK_ID";
 
@@ -78,21 +75,18 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
-        ButterKnife.bind(this, root);
-        setHasOptionsMenu(true);
         mDetailTitle = (TextView) root.findViewById(R.id.task_detail_title);
         mDetailDescription = (TextView) root.findViewById(R.id.task_detail_description);
         mDetailCompleteStatus = (CheckBox) root.findViewById(R.id.task_detail_complete);
 
-        // Set up floating action button
-        FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_edit_task);
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        setFloatingActionButton(R.id.fab_edit_task, R.drawable.ic_edit, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.editTask();
             }
         });
+
+        setHasOptionsMenu(true);
 
         return root;
     }
@@ -159,7 +153,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     @Override
     public void showEditTask(String taskId) {
-        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        Intent intent = new Intent(getContext(), AddEditTaskBaseActivity.class);
         intent.putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
         startActivityForResult(intent, REQUEST_EDIT_TASK);
     }

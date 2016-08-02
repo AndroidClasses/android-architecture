@@ -16,7 +16,7 @@
 
 package com.task.ui.addedittask;
 
-import com.example.android.architecture.blueprints.todoapp.TestUseCaseScheduler;
+import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
 import com.task.domain.usecase.GetTask;
 import com.task.domain.usecase.SaveTask;
