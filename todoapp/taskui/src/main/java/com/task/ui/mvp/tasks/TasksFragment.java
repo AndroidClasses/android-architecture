@@ -20,9 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.PopupMenu;
@@ -44,6 +42,7 @@ import com.repository.task.model.Task;
 import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.Constants;
 import com.task.ui.R;
+import com.task.ui.mvp.TaskBaseFragment;
 import com.task.ui.mvp.addedittask.AddEditTaskBaseActivity;
 import com.task.ui.mvp.taskdetail.TaskDetailBaseActivity;
 
@@ -57,7 +56,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Display a grid of {@link Task}s. User can choose to view all, active or completed tasks.
  */
-public class TasksFragment extends Fragment implements TasksContract.View {
+public class TasksFragment extends TaskBaseFragment implements TasksContract.View {
 
     private TasksContract.Presenter mPresenter;
 
@@ -107,11 +106,9 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
 
-        ButterKnife.bind(this, root);
         // Set up tasks view
         ListView listView = ButterKnife.findById(root, R.id.tasks_list);
         listView.setAdapter(mListAdapter);
@@ -130,11 +127,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
             }
         });
 
-        // Set up floating action button
-        FloatingActionButton fab = ButterKnife.findById(getActivity(), R.id.fab_add_task);
-
-        fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setFloatingActionButton(R.id.fab_add_task, R.drawable.ic_add, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.addNewTask();
