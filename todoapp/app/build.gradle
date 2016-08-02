@@ -6,7 +6,7 @@ android {
     buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId "com.example.android.architecture.blueprints.todomvpdagger"
+        applicationId "com.clean.aar"
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode 1
