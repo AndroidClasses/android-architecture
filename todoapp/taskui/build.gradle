@@ -24,7 +24,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile project(path: ':taskdomain')
-    compile project(path: ':uicommon')
+    compile project(path: ':commonui')
 
     apt libraries.butterKnifeCompiler
     compile libraries.butterKnife

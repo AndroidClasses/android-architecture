@@ -16,10 +16,9 @@
 
 package com.task.ui.mvp.statistics;
 
-import com.clean.common.usecase.UseCase;
 import com.common.ui.app.UseCaseHandler;
-import com.repository.task.model.Statistics;
 import com.task.domain.usecase.GetStatistics;
+import com.task.ui.mvp.TaskBasePresenter;
 
 import javax.inject.Inject;
 
@@ -35,9 +34,8 @@ import javax.inject.Inject;
  * therefore, to ensure the developer doesn't instantiate the class manually and bypasses Dagger,
  * it's good practice minimise the visibility of the class/constructor as much as possible.
  **/
-final public class StatisticsPresenter implements StatisticsContract.Presenter {
+final public class StatisticsPresenter extends TaskBasePresenter implements StatisticsContract.Presenter {
     private final StatisticsContract.View mStatisticsView;
-    private final UseCaseHandler mUseCaseHandler;
     private final GetStatistics mGetStatistics;
 
     /**
@@ -47,8 +45,8 @@ final public class StatisticsPresenter implements StatisticsContract.Presenter {
     @Inject
     public StatisticsPresenter(UseCaseHandler useCaseHandler, StatisticsContract.View statisticsView,
                         GetStatistics getStatistics) {
+        super(useCaseHandler);
         mStatisticsView = statisticsView;
-        mUseCaseHandler = useCaseHandler;
         mGetStatistics = getStatistics;
     }
 
@@ -69,28 +67,26 @@ final public class StatisticsPresenter implements StatisticsContract.Presenter {
     private void loadStatistics() {
         mStatisticsView.setProgressIndicator(true);
 
-        mUseCaseHandler.execute(mGetStatistics, new GetStatistics.RequestValues(),
-                new UseCase.UseCaseCallback<GetStatistics.ResponseValue>() {
-            @Override
-            public void onSuccess(GetStatistics.ResponseValue response) {
-                Statistics statistics = response.getStatistics();
-                // The view may not be able to handle UI updates anymore
-                if (!mStatisticsView.isActive()) {
-                    return;
-                }
-                mStatisticsView.setProgressIndicator(false);
+        execute(mGetStatistics);
+    }
 
-                mStatisticsView.showStatistics(statistics.getActiveTasks(), statistics.getCompletedTasks());
-            }
+    @Override
+    protected void successGetStatistics(int activeTasks, int completedTasks) {
+        // The view may not be able to handle UI updates anymore
+        if (!mStatisticsView.isActive()) {
+            return;
+        }
+        mStatisticsView.setProgressIndicator(false);
 
-            @Override
-            public void onError() {
-                // The view may not be able to handle UI updates anymore
-                if (!mStatisticsView.isActive()) {
-                    return;
-                }
-                mStatisticsView.showLoadingStatisticsError();
-            }
-        });
+        mStatisticsView.showStatistics(activeTasks, completedTasks);
+    }
+
+    @Override
+    protected void errorGetStatistics() {
+        // The view may not be able to handle UI updates anymore
+        if (!mStatisticsView.isActive()) {
+            return;
+        }
+        mStatisticsView.showLoadingStatisticsError();
     }
 }

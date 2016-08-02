@@ -19,8 +19,8 @@ package com.task.domain.usecase;
 import android.support.annotation.NonNull;
 
 import com.clean.common.usecase.UseCase;
-import com.repository.task.model.Task;
 import com.repository.task.data.TasksRepository;
+import com.repository.task.model.Task;
 
 import javax.inject.Inject;
 

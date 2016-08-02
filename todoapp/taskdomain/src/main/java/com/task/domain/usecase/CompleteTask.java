@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Marks a task as completed.
  */
-public class CompleteTask extends UseCase<CompleteTask.RequestValues, CompleteTask.ResponseValue> {
+public class CompleteTask extends UseCase<CompleteTask.RequestValues, UseCase.EmptyResponseValue> {
 
     private final TasksRepository mTasksRepository;
 
@@ -40,7 +40,7 @@ public class CompleteTask extends UseCase<CompleteTask.RequestValues, CompleteTa
     protected void executeUseCase(final RequestValues values) {
         String completedTask = values.getCompletedTask();
         mTasksRepository.completeTask(completedTask);
-        getUseCaseCallback().onSuccess(new ResponseValue());
+        getUseCaseCallback().onSuccess(emptyResponseValue());
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
@@ -54,8 +54,5 @@ public class CompleteTask extends UseCase<CompleteTask.RequestValues, CompleteTa
         public String getCompletedTask() {
             return mCompletedTask;
         }
-    }
-
-    public static final class ResponseValue implements UseCase.ResponseValue {
     }
 }

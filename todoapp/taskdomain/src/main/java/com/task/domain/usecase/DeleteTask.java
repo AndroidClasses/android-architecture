@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Deletes a {@link Task} from the {@link TasksRepository}.
  */
-public class DeleteTask extends UseCase<DeleteTask.RequestValues, DeleteTask.ResponseValue> {
+public class DeleteTask extends UseCase<DeleteTask.RequestValues, UseCase.EmptyResponseValue> {
 
     private final TasksRepository mTasksRepository;
 
@@ -40,7 +40,7 @@ public class DeleteTask extends UseCase<DeleteTask.RequestValues, DeleteTask.Res
     @Override
     protected void executeUseCase(final RequestValues values) {
         mTasksRepository.deleteTask(values.getTaskId());
-        getUseCaseCallback().onSuccess(new ResponseValue());
+        getUseCaseCallback().onSuccess(emptyResponseValue());
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
@@ -54,6 +54,4 @@ public class DeleteTask extends UseCase<DeleteTask.RequestValues, DeleteTask.Res
             return mTaskId;
         }
     }
-
-    public static final class ResponseValue implements UseCase.ResponseValue { }
 }

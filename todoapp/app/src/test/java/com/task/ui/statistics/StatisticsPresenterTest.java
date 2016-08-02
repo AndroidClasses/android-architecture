@@ -16,7 +16,7 @@
 
 package com.task.ui.statistics;
 
-import com.example.android.architecture.blueprints.todoapp.TestUseCaseScheduler;
+import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
 import com.repository.task.model.Task;
 import com.repository.task.data.TasksDataSource;

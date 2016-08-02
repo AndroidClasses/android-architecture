@@ -4,7 +4,7 @@ include ':app'
 // modules involves android framework begin, include presenter and view of
 // MVP pattern for each domain and 'uicommon' for all domain
 include ':taskui'
-include ':uicommon'
+include ':commonui'
 
 // modules without android framework begin, include
 // entities and use cases layer of clean architectures for each domain

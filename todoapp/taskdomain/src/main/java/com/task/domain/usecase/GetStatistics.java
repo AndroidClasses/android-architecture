@@ -17,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Calculate statistics of active and completed Tasks {@link Task} in the {@link TasksRepository}.
  */
-public class GetStatistics extends UseCase<GetStatistics.RequestValues, GetStatistics.ResponseValue> {
+public class GetStatistics extends UseCase<UseCase.EmptyRequestValues, GetStatistics.ResponseValue> {
 
     private final TasksRepository mTasksRepository;
 
@@ -26,7 +26,7 @@ public class GetStatistics extends UseCase<GetStatistics.RequestValues, GetStati
     }
 
     @Override
-    protected void executeUseCase(RequestValues requestValues) {
+    protected void executeUseCase(UseCase.EmptyRequestValues requestValues) {
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
@@ -52,9 +52,6 @@ public class GetStatistics extends UseCase<GetStatistics.RequestValues, GetStati
                 getUseCaseCallback().onError();
             }
         });
-    }
-
-    public static class RequestValues implements UseCase.RequestValues {
     }
 
     public static class ResponseValue implements UseCase.ResponseValue {

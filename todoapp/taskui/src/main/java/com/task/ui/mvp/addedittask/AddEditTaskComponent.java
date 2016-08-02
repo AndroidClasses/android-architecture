@@ -18,5 +18,5 @@ import dagger.Component;
         modules = AddEditTaskPresenterModule.class)
 public interface AddEditTaskComponent {
 
-    void inject(AddEditTaskActivity addEditTaskActivity);
+    void inject(AddEditTaskBaseActivity addEditTaskActivity);
 }

@@ -44,8 +44,8 @@ import com.repository.task.model.Task;
 import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.Constants;
 import com.task.ui.R;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
-import com.task.ui.mvp.taskdetail.TaskDetailActivity;
+import com.task.ui.mvp.addedittask.AddEditTaskBaseActivity;
+import com.task.ui.mvp.taskdetail.TaskDetailBaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -308,7 +308,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Override
     public void showAddTask() {
-        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        Intent intent = new Intent(getContext(), AddEditTaskBaseActivity.class);
         startActivityForResult(intent, Constants.REQUEST_ADD_TASK);
     }
 
@@ -316,8 +316,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     public void showTaskDetailsUi(String taskId) {
         // in it's own Activity, since it makes more sense that way and it gives us the flexibility
         // to show some Intent stubbing.
-        Intent intent = new Intent(getContext(), TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, taskId);
+        Intent intent = new Intent(getContext(), TaskDetailBaseActivity.class);
+        intent.putExtra(TaskDetailBaseActivity.EXTRA_TASK_ID, taskId);
         startActivity(intent);
     }
 

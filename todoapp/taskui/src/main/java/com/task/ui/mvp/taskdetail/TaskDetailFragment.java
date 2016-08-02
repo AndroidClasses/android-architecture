@@ -35,7 +35,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.task.ui.R;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
+import com.task.ui.mvp.addedittask.AddEditTaskBaseActivity;
 import com.task.ui.mvp.addedittask.AddEditTaskFragment;
 
 import butterknife.ButterKnife;
@@ -159,7 +159,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     @Override
     public void showEditTask(String taskId) {
-        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        Intent intent = new Intent(getContext(), AddEditTaskBaseActivity.class);
         intent.putExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
         startActivityForResult(intent, REQUEST_EDIT_TASK);
     }

@@ -23,6 +23,8 @@ package com.clean.common.usecase;
  * @param <P> the response type
  */
 public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase.ResponseValue> {
+    private static final EmptyRequestValues EMPTY_REQUEST_VALUES = new EmptyRequestValues();
+    public static final EmptyResponseValue EMPTY_RESPONSE_VALUE = new EmptyResponseValue();
 
     private Q mRequestValues;
 
@@ -65,5 +67,16 @@ public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase
     public interface UseCaseCallback<R> {
         void onSuccess(R response);
         void onError();
+    }
+
+    public static final class EmptyRequestValues implements RequestValues { }
+    public static final class EmptyResponseValue implements ResponseValue { }
+
+    public static EmptyRequestValues emptyRequestValues() {
+        return EMPTY_REQUEST_VALUES;
+    }
+
+    public static EmptyResponseValue emptyResponseValue() {
+        return EMPTY_RESPONSE_VALUE;
     }
 }
