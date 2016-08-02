@@ -27,7 +27,7 @@
         android:theme="@style/AppTheme"
         android:name="com.clean.aar.CleanAarApplication">
         <activity
-                android:name="com.task.ui.mvp.tasks.TasksActivity"
+                android:name=".MainActivity"
                 android:theme="@style/AppTheme.OverlapSystemBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
