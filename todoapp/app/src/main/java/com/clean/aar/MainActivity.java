@@ -1,11 +1,12 @@
 package com.clean.aar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 
+import com.task.ui.Constants;
 import com.task.ui.TaskUiHelper;
 
 import butterknife.ButterKnife;
@@ -28,11 +29,16 @@ public class MainActivity extends AppCompatActivity {
         TaskUiHelper.gotoStatisticsActivity(this);
     }
 
+    @OnClick(R.id.add_task)
+    void onAddTaskClicked(View view) {
+        TaskUiHelper.gotoAddEditActivity(this, Constants.REQUEST_ADD_TASK);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         unbinder = ButterKnife.bind(this);
     }
@@ -41,5 +47,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_ADD_TASK && resultCode == RESULT_OK) {
+            TaskUiHelper.gotoTasksActivity(this);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

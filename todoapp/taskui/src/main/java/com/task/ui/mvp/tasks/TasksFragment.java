@@ -43,7 +43,6 @@ import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskBaseFragment;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 import com.task.ui.mvp.taskdetail.TaskDetailActivity;
 
 import java.util.ArrayList;
@@ -301,8 +300,7 @@ public class TasksFragment extends TaskBaseFragment implements TasksContract.Vie
 
     @Override
     public void showAddTask() {
-        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
-        startActivityForResult(intent, Constants.REQUEST_ADD_TASK);
+        gotoAddEditActivity(null, Constants.REQUEST_ADD_TASK);
     }
 
     @Override

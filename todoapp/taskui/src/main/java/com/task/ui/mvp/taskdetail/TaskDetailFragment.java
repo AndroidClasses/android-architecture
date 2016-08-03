@@ -35,7 +35,6 @@ import android.widget.TextView;
 import com.task.ui.Constants;
 import com.task.ui.R;
 import com.task.ui.mvp.TaskBaseFragment;
-import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -150,9 +149,7 @@ public class TaskDetailFragment extends TaskBaseFragment implements TaskDetailCo
 
     @Override
     public void showEditTask(String taskId) {
-        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
-        intent.putExtra(Constants.ARGUMENT_EDIT_TASK_ID, taskId);
-        startActivityForResult(intent, REQUEST_EDIT_TASK);
+        gotoAddEditActivity(taskId, REQUEST_EDIT_TASK);
     }
 
     @Override

@@ -68,6 +68,7 @@ ext.versions = [
         showcaseView : '5.4.3',
         asyncHttp    : '1.4.9',
         httpClient   : '4.4.1.2',
+        dexmaker:      '1.2',
 ]
 
 ext.gradlePlugins = [
@@ -103,6 +104,7 @@ ext.libraries = [
         supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign           : "com.android.support:design:$versions.supportLibs",
         supportRecyclerView     : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportV4               : "com.android.support:support-v4:$versions.supportLibs",
         supportCardView         : "com.android.support:cardview-v7:$versions.supportLibs",
 
         butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
@@ -168,4 +170,6 @@ ext.libraries = [
         showcaseView            : "com.github.amlcurran.showcaseview:library:$versions.showcaseView",
         asyncHttp               : "com.loopj.android:android-async-http:$versions.asyncHttp",
         httpClient              : "cz.msebera.android:httpclient:$versions.httpClient",
+        dexmaker                : "com.google.dexmaker:dexmaker:$versions.dexmaker",
+        dexmakerMockito         : "com.google.dexmaker:dexmaker-mockito:$versions.dexmaker",
 ]

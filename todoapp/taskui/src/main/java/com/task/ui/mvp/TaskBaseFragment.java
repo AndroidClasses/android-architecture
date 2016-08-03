@@ -1,8 +1,13 @@
 package com.task.ui.mvp;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.View;
+
+import com.task.ui.Constants;
+import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 
 import butterknife.ButterKnife;
 
@@ -16,4 +21,11 @@ public class TaskBaseFragment extends Fragment {
         fab.setOnClickListener(onClickListener);
     }
 
+    protected void gotoAddEditActivity(String taskId, int code) {
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        if (!TextUtils.isEmpty(taskId)) {
+            intent.putExtra(Constants.ARGUMENT_EDIT_TASK_ID, taskId);
+        }
+        startActivityForResult(intent, code);
+    }
 }
