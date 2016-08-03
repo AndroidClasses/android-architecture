@@ -24,15 +24,14 @@ import java.util.Map;
  */
 public class FilterFactory {
 
-    private static final Map<TasksFilterType, TaskFilter> mFilters = new HashMap<>();
-
-    public FilterFactory() {
-        mFilters.put(TasksFilterType.ALL_TASKS, new FilterAllTaskFilter());
-        mFilters.put(TasksFilterType.ACTIVE_TASKS, new ActiveTaskFilter());
-        mFilters.put(TasksFilterType.COMPLETED_TASKS, new CompleteTaskFilter());
+    private static final Map<TasksFilterType, TaskFilter> FILTERS = new HashMap<>();
+    static {
+        FILTERS.put(TasksFilterType.ALL_TASKS, new FilterAllTaskFilter());
+        FILTERS.put(TasksFilterType.ACTIVE_TASKS, new ActiveTaskFilter());
+        FILTERS.put(TasksFilterType.COMPLETED_TASKS, new CompleteTaskFilter());
     }
 
     public TaskFilter create(TasksFilterType filterType) {
-        return mFilters.get(filterType);
+        return FILTERS.get(filterType);
     }
 }

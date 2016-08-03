@@ -30,29 +30,29 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class CompleteTask extends UseCase<CompleteTask.RequestValues, UseCase.EmptyResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public CompleteTask(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
         String completedTask = values.getCompletedTask();
-        mTasksRepository.completeTask(completedTask);
+        repository.completeTask(completedTask);
         getUseCaseCallback().onSuccess(emptyResponseValue());
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
 
-        private final String mCompletedTask;
+        private final String completedTask;
 
         public RequestValues(@NonNull String completedTask) {
-            mCompletedTask = checkNotNull(completedTask, "completedTask cannot be null!");
+            this.completedTask = checkNotNull(completedTask, "completedTask cannot be null!");
         }
 
         public String getCompletedTask() {
-            return mCompletedTask;
+            return completedTask;
         }
     }
 }

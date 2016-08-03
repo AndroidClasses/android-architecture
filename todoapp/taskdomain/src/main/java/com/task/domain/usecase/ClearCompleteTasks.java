@@ -31,15 +31,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class ClearCompleteTasks
         extends UseCase<UseCase.EmptyRequestValues, UseCase.EmptyResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public ClearCompleteTasks(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final UseCase.EmptyRequestValues values) {
-        mTasksRepository.clearCompletedTasks();
+        repository.clearCompletedTasks();
         getUseCaseCallback().onSuccess(emptyResponseValue());
     }
 }

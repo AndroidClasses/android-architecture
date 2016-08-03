@@ -31,27 +31,27 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class DeleteTask extends UseCase<DeleteTask.RequestValues, UseCase.EmptyResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public DeleteTask(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
-        mTasksRepository.deleteTask(values.getTaskId());
+        repository.deleteTask(values.getTaskId());
         getUseCaseCallback().onSuccess(emptyResponseValue());
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
-        private final String mTaskId;
+        private final String taskId;
 
         public RequestValues(@NonNull String taskId) {
-            mTaskId = checkNotNull(taskId, "taskId cannot be null!");
+            this.taskId = checkNotNull(taskId, "taskId cannot be null!");
         }
 
         public String getTaskId() {
-            return mTaskId;
+            return taskId;
         }
     }
 }

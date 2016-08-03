@@ -19,15 +19,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class GetStatistics extends UseCase<UseCase.EmptyRequestValues, GetStatistics.ResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public GetStatistics(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(UseCase.EmptyRequestValues requestValues) {
-        mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
+        repository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
 
@@ -56,14 +56,14 @@ public class GetStatistics extends UseCase<UseCase.EmptyRequestValues, GetStatis
 
     public static class ResponseValue implements UseCase.ResponseValue {
 
-        private final Statistics mStatistics;
+        private final Statistics statistics;
 
         public ResponseValue(@NonNull Statistics statistics) {
-            mStatistics = checkNotNull(statistics, "statistics cannot be null!");
+            this.statistics = checkNotNull(statistics, "statistics cannot be null!");
         }
 
         public Statistics getStatistics() {
-            return mStatistics;
+            return statistics;
         }
     }
 }

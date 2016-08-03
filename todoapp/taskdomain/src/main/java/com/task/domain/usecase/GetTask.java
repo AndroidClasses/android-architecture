@@ -32,15 +32,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class GetTask extends UseCase<GetTask.RequestValues, GetTask.ResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public GetTask(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
-        mTasksRepository.getTask(values.getTaskId(), new TasksDataSource.GetTaskCallback() {
+        repository.getTask(values.getTaskId(), new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {
                 if (task != null) {
@@ -60,27 +60,27 @@ public class GetTask extends UseCase<GetTask.RequestValues, GetTask.ResponseValu
 
     public static final class RequestValues implements UseCase.RequestValues {
 
-        private final String mTaskId;
+        private final String taskId;
 
         public RequestValues(@NonNull String taskId) {
-            mTaskId = checkNotNull(taskId, "taskId cannot be null!");
+            this.taskId = checkNotNull(taskId, "taskId cannot be null!");
         }
 
         public String getTaskId() {
-            return mTaskId;
+            return taskId;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
 
-        private Task mTask;
+        private Task task;
 
         public ResponseValue(@NonNull Task task) {
-            mTask = checkNotNull(task, "task cannot be null!");
+            this.task = checkNotNull(task, "task cannot be null!");
         }
 
         public Task getTask() {
-            return mTask;
+            return task;
         }
     }
 }

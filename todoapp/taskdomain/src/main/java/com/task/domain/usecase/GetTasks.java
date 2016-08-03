@@ -37,9 +37,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class GetTasks extends UseCase<GetTasks.RequestValues, GetTasks.ResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
-    private final FilterFactory mFilterFactory;
+    private final FilterFactory filterFactory;
 
     @Inject
     public GetTasks(@NonNull TasksRepository tasksRepository) {
@@ -47,21 +47,21 @@ public class GetTasks extends UseCase<GetTasks.RequestValues, GetTasks.ResponseV
     }
 
     public GetTasks(@NonNull TasksRepository tasksRepository, @NonNull FilterFactory filterFactory) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
-        mFilterFactory = checkNotNull(filterFactory, "filterFactory cannot be null!");
+        this.repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        this.filterFactory = checkNotNull(filterFactory, "filterFactory cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
         if (values.isForceUpdate()) {
-            mTasksRepository.refreshTasks();
+            repository.refreshTasks();
         }
 
-        mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
+        repository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
                 TasksFilterType currentFiltering = values.getCurrentFiltering();
-                TaskFilter taskFilter = mFilterFactory.create(currentFiltering);
+                TaskFilter taskFilter = filterFactory.create(currentFiltering);
 
                 List<Task> tasksFiltered = taskFilter.filter(tasks);
                 ResponseValue responseValue = new ResponseValue(tasksFiltered);
@@ -78,33 +78,33 @@ public class GetTasks extends UseCase<GetTasks.RequestValues, GetTasks.ResponseV
 
     public static final class RequestValues implements UseCase.RequestValues {
 
-        private final TasksFilterType mCurrentFiltering;
-        private final boolean mForceUpdate;
+        private final TasksFilterType currentFiltering;
+        private final boolean isForceUpdate;
 
         public RequestValues(boolean forceUpdate, @NonNull TasksFilterType currentFiltering) {
-            mForceUpdate = forceUpdate;
-            mCurrentFiltering = checkNotNull(currentFiltering, "currentFiltering cannot be null!");
+            isForceUpdate = forceUpdate;
+            this.currentFiltering = checkNotNull(currentFiltering, "currentFiltering cannot be null!");
         }
 
         public boolean isForceUpdate() {
-            return mForceUpdate;
+            return isForceUpdate;
         }
 
         public TasksFilterType getCurrentFiltering() {
-            return mCurrentFiltering;
+            return currentFiltering;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
 
-        private final List<Task> mTasks;
+        private final List<Task> tasks;
 
         public ResponseValue(@NonNull List<Task> tasks) {
-            mTasks = checkNotNull(tasks, "tasks cannot be null!");
+            this.tasks = checkNotNull(tasks, "tasks cannot be null!");
         }
 
         public List<Task> getTasks() {
-            return mTasks;
+            return tasks;
         }
     }
 }

@@ -31,43 +31,43 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class SaveTask extends UseCase<SaveTask.RequestValues, SaveTask.ResponseValue> {
 
-    private final TasksRepository mTasksRepository;
+    private final TasksRepository repository;
 
     @Inject public SaveTask(@NonNull TasksRepository tasksRepository) {
-        mTasksRepository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
+        repository = checkNotNull(tasksRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(final RequestValues values) {
         Task task = values.getTask();
-        mTasksRepository.saveTask(task);
+        repository.saveTask(task);
 
         getUseCaseCallback().onSuccess(new ResponseValue(task));
     }
 
     public static final class RequestValues implements UseCase.RequestValues {
 
-        private final Task mTask;
+        private final Task task;
 
         public RequestValues(@NonNull Task task) {
-            mTask = checkNotNull(task, "task cannot be null!");
+            this.task = checkNotNull(task, "task cannot be null!");
         }
 
         public Task getTask() {
-            return mTask;
+            return task;
         }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {
 
-        private final Task mTask;
+        private final Task task;
 
         public ResponseValue(@NonNull Task task) {
-            mTask = checkNotNull(task, "task cannot be null!");
+            this.task = checkNotNull(task, "task cannot be null!");
         }
 
         public Task getTask() {
-            return mTask;
+            return task;
         }
     }
 }
