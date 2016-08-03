@@ -26,28 +26,28 @@ public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase
     private static final EmptyRequestValues EMPTY_REQUEST_VALUES = new EmptyRequestValues();
     public static final EmptyResponseValue EMPTY_RESPONSE_VALUE = new EmptyResponseValue();
 
-    private Q mRequestValues;
+    private Q requestValues;
 
-    private UseCaseCallback<P> mUseCaseCallback;
+    private UseCaseCallback<P> useCaseCallback;
 
     public void setRequestValues(Q requestValues) {
-        mRequestValues = requestValues;
+        this.requestValues = requestValues;
     }
 
     public Q getRequestValues() {
-        return mRequestValues;
+        return requestValues;
     }
 
     public UseCaseCallback<P> getUseCaseCallback() {
-        return mUseCaseCallback;
+        return useCaseCallback;
     }
 
     public void setUseCaseCallback(UseCaseCallback<P> useCaseCallback) {
-        mUseCaseCallback = useCaseCallback;
+        this.useCaseCallback = useCaseCallback;
     }
 
     public void run() {
-       executeUseCase(mRequestValues);
+       executeUseCase(requestValues);
     }
 
     protected abstract void executeUseCase(Q requestValues);

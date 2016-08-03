@@ -33,10 +33,10 @@ public class UseCaseHandler {
 
 //    private static UseCaseHandler INSTANCE;
 
-    private final UseCaseScheduler mUseCaseScheduler;
+    private final UseCaseScheduler useCaseScheduler;
 
     @Inject public UseCaseHandler(UseCaseScheduler useCaseScheduler) {
-        mUseCaseScheduler = useCaseScheduler;
+        this.useCaseScheduler = useCaseScheduler;
     }
 
     public <T extends UseCase.RequestValues, R extends UseCase.ResponseValue> void execute(
@@ -49,7 +49,7 @@ public class UseCaseHandler {
         // that the app is busy until the response is handled.
         EspressoIdlingResource.increment(); // App is busy until further notice
 
-        mUseCaseScheduler.execute(new Runnable() {
+        useCaseScheduler.execute(new Runnable() {
             @Override
             public void run() {
 
@@ -66,12 +66,12 @@ public class UseCaseHandler {
 
     public <V extends UseCase.ResponseValue> void notifyResponse(final V response,
             final UseCase.UseCaseCallback<V> useCaseCallback) {
-        mUseCaseScheduler.notifyResponse(response, useCaseCallback);
+        useCaseScheduler.notifyResponse(response, useCaseCallback);
     }
 
     private <V extends UseCase.ResponseValue> void notifyError(
             final UseCase.UseCaseCallback<V> useCaseCallback) {
-        mUseCaseScheduler.onError(useCaseCallback);
+        useCaseScheduler.onError(useCaseCallback);
     }
 
     private static final class UiCallbackWrapper<V extends UseCase.ResponseValue> implements

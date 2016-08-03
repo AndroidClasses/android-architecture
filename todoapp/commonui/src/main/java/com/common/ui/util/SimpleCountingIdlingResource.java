@@ -33,7 +33,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class SimpleCountingIdlingResource implements IdlingResource {
 
-    private final String mResourceName;
+    private final String resourceName;
 
     private final AtomicInteger counter = new AtomicInteger(0);
 
@@ -46,12 +46,12 @@ public final class SimpleCountingIdlingResource implements IdlingResource {
      * @param resourceName the resource name this resource should report to Espresso.
      */
     public SimpleCountingIdlingResource(String resourceName) {
-        mResourceName = checkNotNull(resourceName);
+        this.resourceName = checkNotNull(resourceName);
     }
 
     @Override
     public String getName() {
-        return mResourceName;
+        return resourceName;
     }
 
     @Override
