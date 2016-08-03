@@ -29,6 +29,8 @@ dependencies {
 
     // Dagger dependencies
     apt libraries.daggerCompiler
+
+    compile libraries.supportDesign
 //    provided libraries.javaxAnnotation
     compile libraries.dagger
 }

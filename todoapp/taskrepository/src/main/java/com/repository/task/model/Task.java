@@ -27,15 +27,15 @@ import java.util.UUID;
  */
 public final class Task {
 
-    private final String mId;
+    private final String id;
 
     @Nullable
-    private final String mTitle;
+    private final String title;
 
     @Nullable
-    private final String mDescription;
+    private final String description;
 
-    private final boolean mCompleted;
+    private final boolean isCompleted;
     /**
      * Use this constructor to create a new active Task.
      *
@@ -43,10 +43,10 @@ public final class Task {
      * @param description
      */
     public Task(@Nullable String title, @Nullable String description) {
-        mId = UUID.randomUUID().toString();
-        mTitle = title;
-        mDescription = description;
-        mCompleted = false;
+        id = UUID.randomUUID().toString();
+        this.title = title;
+        this.description = description;
+        isCompleted = false;
     }
 
     /**
@@ -58,10 +58,10 @@ public final class Task {
      * @param id of the class
      */
     public Task(@Nullable String title, @Nullable String description, String id) {
-        mId = id;
-        mTitle = title;
-        mDescription = description;
-        mCompleted = false;
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        isCompleted = false;
     }
 
     /**
@@ -72,10 +72,10 @@ public final class Task {
      * @param completed
      */
     public Task(@Nullable String title, @Nullable String description, boolean completed) {
-        mId = UUID.randomUUID().toString();
-        mTitle = title;
-        mDescription = description;
-        mCompleted = completed;
+        id = UUID.randomUUID().toString();
+        this.title = title;
+        this.description = description;
+        isCompleted = completed;
     }
 
     /**
@@ -88,46 +88,46 @@ public final class Task {
      * @param completed
      */
     public Task(@Nullable String title, @Nullable String description, String id, boolean completed) {
-        mId = id;
-        mTitle = title;
-        mDescription = description;
-        mCompleted = completed;
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        isCompleted = completed;
     }
 
     public String getId() {
-        return mId;
+        return id;
     }
 
     @Nullable
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     @Nullable
     public String getTitleForList() {
-        if (mTitle != null && !mTitle.equals("")) {
-            return mTitle;
+        if (title != null && !title.equals("")) {
+            return title;
         } else {
-            return mDescription;
+            return description;
         }
     }
 
     @Nullable
     public String getDescription() {
-        return mDescription;
+        return description;
     }
 
     public boolean isCompleted() {
-        return mCompleted;
+        return isCompleted;
     }
 
     public boolean isActive() {
-        return !mCompleted;
+        return !isCompleted;
     }
 
     public boolean isEmpty() {
-        return (mTitle == null || "".equals(mTitle)) &&
-                (mDescription == null || "".equals(mDescription));
+        return (title == null || "".equals(title)) &&
+                (description == null || "".equals(description));
     }
 
     @Override
@@ -135,18 +135,18 @@ public final class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equal(mId, task.mId) &&
-                Objects.equal(mTitle, task.mTitle) &&
-                Objects.equal(mDescription, task.mDescription);
+        return Objects.equal(id, task.id) &&
+                Objects.equal(title, task.title) &&
+                Objects.equal(description, task.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(mId, mTitle, mDescription);
+        return Objects.hashCode(id, title, description);
     }
 
     @Override
     public String toString() {
-        return "Task with title " + mTitle;
+        return "Task with title " + title;
     }
 }

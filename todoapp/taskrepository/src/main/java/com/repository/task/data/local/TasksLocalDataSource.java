@@ -40,11 +40,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Singleton
 public class TasksLocalDataSource implements TasksDataSource {
 
-    private TasksDbHelper mDbHelper;
+    private TasksDbHelper dbHelper;
 
     public TasksLocalDataSource(@NonNull Context context) {
         checkNotNull(context);
-        mDbHelper = new TasksDbHelper(context);
+        dbHelper = new TasksDbHelper(context);
     }
 
     /**
@@ -54,7 +54,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
         List<Task> tasks = new ArrayList<Task>();
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] projection = {
                 TaskEntry.COLUMN_NAME_ENTRY_ID,
@@ -99,7 +99,7 @@ public class TasksLocalDataSource implements TasksDataSource {
      */
     @Override
     public void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback) {
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String[] projection = {
                 TaskEntry.COLUMN_NAME_ENTRY_ID,
@@ -142,7 +142,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     @Override
     public void saveTask(@NonNull Task task) {
         checkNotNull(task);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(TaskEntry.COLUMN_NAME_ENTRY_ID, task.getId());
@@ -157,7 +157,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void completeTask(@NonNull Task task) {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(TaskEntry.COLUMN_NAME_COMPLETED, true);
@@ -178,7 +178,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void activateTask(@NonNull Task task) {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(TaskEntry.COLUMN_NAME_COMPLETED, false);
@@ -199,7 +199,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void clearCompletedTasks() {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String selection = TaskEntry.COLUMN_NAME_COMPLETED + " LIKE ?";
         String[] selectionArgs = { "1" };
@@ -217,7 +217,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void deleteAllTasks() {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         db.delete(TaskEntry.TABLE_NAME, null, null);
 
@@ -226,7 +226,7 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void deleteTask(@NonNull String taskId) {
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         String selection = TaskEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
         String[] selectionArgs = { taskId };
