@@ -51,16 +51,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
  **/
 final public class TasksPresenter extends TaskBasePresenter implements TasksContract.Presenter {
 
-    private final TasksContract.View mTasksView;
+    @NonNull
+    private final TasksContract.View tasksView;
 
-    private final GetTasks mGetTasks;
-    private final CompleteTask mCompleteTask;
-    private final ActivateTask mActivateTask;
-    private final ClearCompleteTasks mClearCompleteTasks;
+    private final GetTasks getTasks;
+    private final CompleteTask completeTask;
+    private final ActivateTask activateTask;
+    private final ClearCompleteTasks clearCompleteTasks;
 
-    private TasksFilterType mCurrentFiltering = TasksFilterType.ALL_TASKS;
+    private TasksFilterType currentFiltering = TasksFilterType.ALL_TASKS;
 
-    private boolean mFirstLoad = true;
+    private boolean isFirstLoad = true;
 
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
@@ -71,11 +72,11 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
                    GetTasks getTasks, CompleteTask completeTask,
                    ActivateTask activateTask, ClearCompleteTasks clearCompleteTasks) {
         super(handler);
-        mTasksView = tasksView;
-        mGetTasks = getTasks;
-        mCompleteTask = completeTask;
-        mActivateTask = activateTask;
-        mClearCompleteTasks = clearCompleteTasks;
+        this.tasksView = tasksView;
+        this.getTasks = getTasks;
+        this.completeTask = completeTask;
+        this.activateTask = activateTask;
+        this.clearCompleteTasks = clearCompleteTasks;
     }
 
     /**
@@ -84,7 +85,7 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
      */
     @Inject
     void setupListeners() {
-        mTasksView.setPresenter(this);
+        tasksView.setPresenter(this);
     }
 
     @Override
@@ -97,15 +98,15 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
         // If a task was successfully added, show snackbar
         if (Constants.REQUEST_ADD_TASK == requestCode
                 && Activity.RESULT_OK == resultCode) {
-            mTasksView.showSuccessfullySavedMessage();
+            tasksView.showSuccessfullySavedMessage();
         }
     }
 
     @Override
     public void loadTasks(boolean forceUpdate) {
         // Simplification for sample: a network reload will be forced on first load.
-        loadTasks(forceUpdate || mFirstLoad, true);
-        mFirstLoad = false;
+        loadTasks(forceUpdate || isFirstLoad, true);
+        isFirstLoad = false;
     }
 
     /**
@@ -114,10 +115,10 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
      */
     private void loadTasks(boolean forceUpdate, final boolean showLoadingUI) {
         if (showLoadingUI) {
-            mTasksView.setLoadingIndicator(true);
+            tasksView.setLoadingIndicator(true);
         }
 
-        execute(mGetTasks, forceUpdate, mCurrentFiltering, showLoadingUI);
+        execute(getTasks, forceUpdate, currentFiltering, showLoadingUI);
     }
 
     private void processTasks(List<Task> tasks) {
@@ -126,66 +127,66 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
             processEmptyTasks();
         } else {
             // Show the list of tasks
-            mTasksView.showTasks(tasks);
+            tasksView.showTasks(tasks);
             // Set the filter label's text.
             showFilterLabel();
         }
     }
 
     private void showFilterLabel() {
-        switch (mCurrentFiltering) {
+        switch (currentFiltering) {
             case ACTIVE_TASKS:
-                mTasksView.showActiveFilterLabel();
+                tasksView.showActiveFilterLabel();
                 break;
             case COMPLETED_TASKS:
-                mTasksView.showCompletedFilterLabel();
+                tasksView.showCompletedFilterLabel();
                 break;
             default:
-                mTasksView.showAllFilterLabel();
+                tasksView.showAllFilterLabel();
                 break;
         }
     }
 
     private void processEmptyTasks() {
-        switch (mCurrentFiltering) {
+        switch (currentFiltering) {
             case ACTIVE_TASKS:
-                mTasksView.showNoActiveTasks();
+                tasksView.showNoActiveTasks();
                 break;
             case COMPLETED_TASKS:
-                mTasksView.showNoCompletedTasks();
+                tasksView.showNoCompletedTasks();
                 break;
             default:
-                mTasksView.showNoTasks();
+                tasksView.showNoTasks();
                 break;
         }
     }
 
     @Override
     public void addNewTask() {
-        mTasksView.showAddTask();
+        tasksView.showAddTask();
     }
 
     @Override
     public void openTaskDetails(@NonNull Task requestedTask) {
         checkNotNull(requestedTask, "requestedTask cannot be null!");
-        mTasksView.showTaskDetailsUi(requestedTask.getId());
+        tasksView.showTaskDetailsUi(requestedTask.getId());
     }
 
     @Override
     public void completeTask(@NonNull Task completedTask) {
         checkNotNull(completedTask, "completedTask cannot be null!");
-        execute(mCompleteTask, completedTask.getId());
+        execute(completeTask, completedTask.getId());
     }
 
     @Override
     public void activateTask(@NonNull Task activeTask) {
         checkNotNull(activeTask, "activeTask cannot be null!");
-        execute(mActivateTask, activeTask.getId());
+        execute(activateTask, activeTask.getId());
     }
 
     @Override
     public void clearCompletedTasks() {
-        execute(mClearCompleteTasks);
+        execute(clearCompleteTasks);
     }
 
     /**
@@ -197,22 +198,22 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
      */
     @Override
     public void setFiltering(TasksFilterType requestType) {
-        mCurrentFiltering = requestType;
+        currentFiltering = requestType;
     }
 
     @Override
     public TasksFilterType getFiltering() {
-        return mCurrentFiltering;
+        return currentFiltering;
     }
 
     @Override
     protected void successGetTasks(List<Task> tasks, final boolean showLoadingUI) {
         // The view may not be able to handle UI updates anymore
-        if (!mTasksView.isActive()) {
+        if (!tasksView.isActive()) {
             return;
         }
         if (showLoadingUI) {
-            mTasksView.setLoadingIndicator(false);
+            tasksView.setLoadingIndicator(false);
         }
 
         processTasks(tasks);
@@ -221,42 +222,42 @@ final public class TasksPresenter extends TaskBasePresenter implements TasksCont
     @Override
     protected void errorGetTasks() {
         // The view may not be able to handle UI updates anymore
-        if (!mTasksView.isActive()) {
+        if (!tasksView.isActive()) {
             return;
         }
-        mTasksView.showLoadingTasksError();
+        tasksView.showLoadingTasksError();
     }
 
     @Override
     protected void successCompleteTask() {
-        mTasksView.showTaskMarkedComplete();
+        tasksView.showTaskMarkedComplete();
         loadTasks(false, false);
     }
 
     @Override
     protected void errorCompleteTask() {
-        mTasksView.showLoadingTasksError();
+        tasksView.showLoadingTasksError();
     }
 
     @Override
     protected void successActivateTask() {
-        mTasksView.showTaskMarkedActive();
+        tasksView.showTaskMarkedActive();
         loadTasks(false, false);
     }
 
     @Override
     protected void errorActivateTask() {
-        mTasksView.showLoadingTasksError();
+        tasksView.showLoadingTasksError();
     }
 
     @Override
     protected void errorClearCompletedTasks() {
-        mTasksView.showLoadingTasksError();
+        tasksView.showLoadingTasksError();
     }
 
     @Override
     protected void successClearCompletedTasks() {
-        mTasksView.showCompletedTasksCleared();
+        tasksView.showCompletedTasksCleared();
         loadTasks(false, false);
     }
 }

@@ -13,7 +13,7 @@ import com.task.ui.mvp.tasks.TasksActivity;
  */
 public class TaskUiHelper {
     private TaskUiHelper() {
-
+        // EMPTY
     }
 
     public static void gotoTasksActivity(Context context) {

@@ -10,14 +10,14 @@ import dagger.Provides;
 @Module
 public class StatisticsPresenterModule {
 
-    private final StatisticsContract.View mView;
+    private final StatisticsContract.View view;
 
     public StatisticsPresenterModule(StatisticsContract.View view) {
-        mView = view;
+        this.view = view;
     }
 
     @Provides
     StatisticsContract.View provideStatisticsContractView() {
-        return mView;
+        return view;
     }
 }

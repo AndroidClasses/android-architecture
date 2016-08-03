@@ -16,6 +16,7 @@
 
 package com.task.ui.mvp.taskdetail;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.common.ui.app.UseCaseHandler;
@@ -42,17 +43,19 @@ import javax.inject.Inject;
  */
 final public class TaskDetailPresenter extends TaskBasePresenter implements TaskDetailContract.Presenter {
 
-    private final TaskDetailContract.View mTaskDetailView;
-    private final GetTask mGetTask;
-    private final CompleteTask mCompleteTask;
-    private final ActivateTask mActivateTask;
-    private final DeleteTask mDeleteTask;
+    @NonNull
+    private final TaskDetailContract.View taskDetailView;
+
+    private final GetTask getTask;
+    private final CompleteTask completeTask;
+    private final ActivateTask activateTask;
+    private final DeleteTask deleteTask;
 
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
      * with {@code @Nullable} values.
      */
-    @Nullable String mTaskId;
+    @Nullable String taskId;
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
      * with {@code @Nullable} values.
@@ -63,12 +66,12 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
                         GetTask getTask, CompleteTask completeTask,
                         ActivateTask activateTask, DeleteTask deleteTask) {
         super(useCaseHandler);
-        mTaskDetailView = taskDetailView;
-        mTaskId = taskId;
-        mGetTask = getTask;
-        mCompleteTask = completeTask;
-        mActivateTask = activateTask;
-        mDeleteTask = deleteTask;
+        this.taskDetailView = taskDetailView;
+        this.taskId = taskId;
+        this.getTask = getTask;
+        this.completeTask = completeTask;
+        this.activateTask = activateTask;
+        this.deleteTask = deleteTask;
     }
 
     /**
@@ -77,7 +80,7 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
      */
     @Inject
     void setupListeners() {
-        mTaskDetailView.setPresenter(this);
+        taskDetailView.setPresenter(this);
     }
 
     @Override
@@ -86,32 +89,32 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
     }
 
     private void openTask() {
-        if (null == mTaskId || mTaskId.isEmpty()) {
-            mTaskDetailView.showMissingTask();
+        if (null == taskId || taskId.isEmpty()) {
+            taskDetailView.showMissingTask();
             return;
         }
 
-        mTaskDetailView.setLoadingIndicator(true);
-        execute(mGetTask, mTaskId);
+        taskDetailView.setLoadingIndicator(true);
+        execute(getTask, taskId);
     }
 
     @Override
     public void editTask() {
-        if (null == mTaskId || mTaskId.isEmpty()) {
-            mTaskDetailView.showMissingTask();
+        if (null == taskId || taskId.isEmpty()) {
+            taskDetailView.showMissingTask();
             return;
         }
-        mTaskDetailView.showEditTask(mTaskId);
+        taskDetailView.showEditTask(taskId);
     }
 
     @Override
     public void deleteTask() {
-        execute(mDeleteTask, mTaskId);
+        execute(deleteTask, taskId);
     }
 
     @Override
     protected void successDeleteTask() {
-        mTaskDetailView.showTaskDeleted();
+        taskDetailView.showTaskDeleted();
     }
 
     @Override
@@ -121,16 +124,16 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
 
     @Override
     public void completeTask() {
-        if (null == mTaskId || mTaskId.isEmpty()) {
-            mTaskDetailView.showMissingTask();
+        if (null == taskId || taskId.isEmpty()) {
+            taskDetailView.showMissingTask();
             return;
         }
 
-        execute(mCompleteTask, mTaskId);
+        execute(completeTask, taskId);
     }
 
     protected void successCompleteTask() {
-        mTaskDetailView.showTaskMarkedComplete();
+        taskDetailView.showTaskMarkedComplete();
     }
 
     protected void errorCompleteTask() {
@@ -139,12 +142,12 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
 
     @Override
     public void activateTask() {
-        if (null == mTaskId || mTaskId.isEmpty()) {
-            mTaskDetailView.showMissingTask();
+        if (null == taskId || taskId.isEmpty()) {
+            taskDetailView.showMissingTask();
             return;
         }
 
-        execute(mActivateTask, mTaskId);
+        execute(activateTask, taskId);
     }
 
     private void showTask(Task task) {
@@ -152,41 +155,41 @@ final public class TaskDetailPresenter extends TaskBasePresenter implements Task
         String description = task.getDescription();
 
         if (title != null && title.isEmpty()) {
-            mTaskDetailView.hideTitle();
+            taskDetailView.hideTitle();
         } else {
-            mTaskDetailView.showTitle(title);
+            taskDetailView.showTitle(title);
         }
 
         if (description != null && description.isEmpty()) {
-            mTaskDetailView.hideDescription();
+            taskDetailView.hideDescription();
         } else {
-            mTaskDetailView.showDescription(description);
+            taskDetailView.showDescription(description);
         }
-        mTaskDetailView.showCompletionStatus(task.isCompleted());
+        taskDetailView.showCompletionStatus(task.isCompleted());
     }
 
     @Override
     protected void successGetTask(Task task) {
         // The view may not be able to handle UI updates anymore
-        if (!mTaskDetailView.isActive()) {
+        if (!taskDetailView.isActive()) {
             return;
         }
-        mTaskDetailView.setLoadingIndicator(false);
+        taskDetailView.setLoadingIndicator(false);
         showTask(task);
     }
 
     @Override
     protected void errorGetTask() {
         // The view may not be able to handle UI updates anymore
-        if (!mTaskDetailView.isActive()) {
+        if (!taskDetailView.isActive()) {
             return;
         }
-        mTaskDetailView.showMissingTask();
+        taskDetailView.showMissingTask();
     }
 
     @Override
     protected void successActivateTask() {
-        mTaskDetailView.showTaskMarkedActive();
+        taskDetailView.showTaskMarkedActive();
     }
 
     @Override

@@ -10,15 +10,15 @@ import dagger.Provides;
 @Module
 public class TasksPresenterModule {
 
-    private final TasksContract.View mView;
+    private final TasksContract.View view;
 
     public TasksPresenterModule(TasksContract.View view) {
-        mView = view;
+        this.view = view;
     }
 
     @Provides
     TasksContract.View provideTasksContractView() {
-        return mView;
+        return view;
     }
 
 //    @Provides

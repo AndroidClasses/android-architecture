@@ -28,17 +28,17 @@ import com.task.ui.mvp.tasks.TasksComponent;
  */
 public class CleanAarApplication extends CommonApplication implements TaskRepositoryHolder {
 
-    private TasksRepositoryComponent mRepositoryComponent;
+    private TasksRepositoryComponent tasksRepositoryComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mRepositoryComponent = TasksRepositoryComponentInstance.instanceComponent(this);
+        tasksRepositoryComponent = TasksRepositoryComponentInstance.instanceComponent(this);
     }
 
     @Override
     public TasksRepositoryComponent getTasksRepositoryComponent() {
-        return mRepositoryComponent;
+        return tasksRepositoryComponent;
     }
 }

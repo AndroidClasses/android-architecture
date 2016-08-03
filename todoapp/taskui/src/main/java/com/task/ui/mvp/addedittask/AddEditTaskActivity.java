@@ -33,7 +33,7 @@ import javax.inject.Inject;
  */
 public class AddEditTaskActivity extends TaskBaseActivity {
     @Inject
-    AddEditTaskPresenter mAddEditTasksPresenter;
+    AddEditTaskPresenter presenter;
 
     @Override
     protected int getLayoutResourceId() {
@@ -48,20 +48,6 @@ public class AddEditTaskActivity extends TaskBaseActivity {
             return R.string.add_task;
         }
     }
-
-//    protected void onFragmentAddBefore() {
-//        // Set up the toolbar.
-//        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        if (getIntent().hasExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID)) {
-//            actionBar.setTitle(R.string.edit_task);
-//        } else {
-//            actionBar.setTitle(R.string.add_task);
-//        }
-//    }
 
     @Override
     protected Fragment newFragmentInstance() {

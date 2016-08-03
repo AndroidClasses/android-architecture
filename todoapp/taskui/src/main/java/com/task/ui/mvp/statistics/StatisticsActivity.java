@@ -29,7 +29,7 @@ import javax.inject.Inject;
  */
 public class StatisticsActivity extends TaskDrawerBaseActivity {
     @Inject
-    StatisticsPresenter mStatiticsPresenter;
+    StatisticsPresenter presenter;
 
     @Override
     protected int getLayoutResourceId() {

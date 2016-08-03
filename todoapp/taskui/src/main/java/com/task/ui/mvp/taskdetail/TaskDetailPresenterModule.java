@@ -10,22 +10,22 @@ import dagger.Provides;
 @Module
 public class TaskDetailPresenterModule {
 
-    private final TaskDetailContract.View mView;
+    private final TaskDetailContract.View view;
 
-    private final String mTaskId;
+    private final String taskId;
 
     public TaskDetailPresenterModule(TaskDetailContract.View view, String taskId) {
-        mView = view;
-        mTaskId = taskId;
+        this.view = view;
+        this.taskId = taskId;
     }
 
     @Provides
     TaskDetailContract.View provideTaskDetailContractView() {
-        return mView;
+        return view;
     }
 
     @Provides
     String provideTaskId() {
-        return mTaskId;
+        return taskId;
     }
 }

@@ -24,9 +24,9 @@ import java.util.List;
  * 3. implement empty response, which is override by sub class.
  */
 public class TaskBasePresenter {
-    private final UseCaseHandler mUseCaseHandler;
-    public TaskBasePresenter(UseCaseHandler mUseCaseHandler) {
-        this.mUseCaseHandler = mUseCaseHandler;
+    private final UseCaseHandler useCaseHandler;
+    public TaskBasePresenter(UseCaseHandler useCaseHandler) {
+        this.useCaseHandler = useCaseHandler;
     }
 
     protected void execute(GetTasks mGetTasks, boolean forceUpdate, TasksFilterType mCurrentFiltering,
@@ -34,7 +34,7 @@ public class TaskBasePresenter {
         GetTasks.RequestValues requestValue = new GetTasks.RequestValues(forceUpdate,
                 mCurrentFiltering);
 
-        mUseCaseHandler.execute(mGetTasks, requestValue,
+        useCaseHandler.execute(mGetTasks, requestValue,
                 new UseCase.UseCaseCallback<GetTasks.ResponseValue>() {
                     @Override
                     public void onSuccess(GetTasks.ResponseValue response) {
@@ -56,7 +56,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(CompleteTask mCompleteTask, String taskId) {
-        mUseCaseHandler.execute(mCompleteTask, new CompleteTask.RequestValues(taskId),
+        useCaseHandler.execute(mCompleteTask, new CompleteTask.RequestValues(taskId),
                 new UseCase.UseCaseCallback<CompleteTask.EmptyResponseValue>() {
                     @Override
                     public void onSuccess(CompleteTask.EmptyResponseValue response) {
@@ -77,7 +77,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(ActivateTask mActivateTask, String taskId) {
-        mUseCaseHandler.execute(mActivateTask, new ActivateTask.RequestValues(taskId),
+        useCaseHandler.execute(mActivateTask, new ActivateTask.RequestValues(taskId),
                 new UseCase.UseCaseCallback<ActivateTask.EmptyResponseValue>() {
                     @Override
                     public void onSuccess(ActivateTask.EmptyResponseValue response) {
@@ -98,7 +98,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(ClearCompleteTasks mClearCompleteTasks) {
-        mUseCaseHandler.execute(mClearCompleteTasks, ClearCompleteTasks.emptyRequestValues(),
+        useCaseHandler.execute(mClearCompleteTasks, ClearCompleteTasks.emptyRequestValues(),
                 new UseCase.UseCaseCallback<ClearCompleteTasks.EmptyResponseValue>() {
                     @Override
                     public void onSuccess(ClearCompleteTasks.EmptyResponseValue response) {
@@ -119,7 +119,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(GetTask mGetTask, String mTaskId) {
-        mUseCaseHandler.execute(mGetTask, new GetTask.RequestValues(mTaskId),
+        useCaseHandler.execute(mGetTask, new GetTask.RequestValues(mTaskId),
                 new UseCase.UseCaseCallback<GetTask.ResponseValue>() {
                     @Override
                     public void onSuccess(GetTask.ResponseValue response) {
@@ -140,7 +140,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(SaveTask mSaveTask, Task newTask) {
-        mUseCaseHandler.execute(mSaveTask, new SaveTask.RequestValues(newTask),
+        useCaseHandler.execute(mSaveTask, new SaveTask.RequestValues(newTask),
                 new UseCase.UseCaseCallback<SaveTask.ResponseValue>() {
                     @Override
                     public void onSuccess(SaveTask.ResponseValue response) {
@@ -161,7 +161,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(GetStatistics mGetStatistics) {
-        mUseCaseHandler.execute(mGetStatistics, GetStatistics.emptyRequestValues(),
+        useCaseHandler.execute(mGetStatistics, GetStatistics.emptyRequestValues(),
                 new UseCase.UseCaseCallback<GetStatistics.ResponseValue>() {
                     @Override
                     public void onSuccess(GetStatistics.ResponseValue response) {
@@ -183,7 +183,7 @@ public class TaskBasePresenter {
     }
 
     protected void execute(DeleteTask mDeleteTask, String mTaskId) {
-        mUseCaseHandler.execute(mDeleteTask, new DeleteTask.RequestValues(mTaskId),
+        useCaseHandler.execute(mDeleteTask, new DeleteTask.RequestValues(mTaskId),
                 new UseCase.UseCaseCallback<DeleteTask.EmptyResponseValue>() {
                     @Override
                     public void onSuccess(DeleteTask.EmptyResponseValue response) {

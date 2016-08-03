@@ -38,11 +38,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTaskContract.View {
 
-    private AddEditTaskContract.Presenter mPresenter;
+    private AddEditTaskContract.Presenter presenter;
 
-    private TextView mTitle;
+    private TextView titleView;
 
-    private TextView mDescription;
+    private TextView descriptionView;
 
     public static AddEditTaskFragment newInstance() {
         return new AddEditTaskFragment();
@@ -55,12 +55,12 @@ public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTask
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        presenter.start();
     }
 
     @Override
     public void setPresenter(@NonNull AddEditTaskContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+        this.presenter = checkNotNull(presenter);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTask
         setFloatingActionButton(R.id.fab_edit_task_done, R.drawable.ic_done, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.saveTask(mTitle.getText().toString(), mDescription.getText().toString());
+                presenter.saveTask(titleView.getText().toString(), descriptionView.getText().toString());
             }
         });
     }
@@ -80,8 +80,8 @@ public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTask
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
 
-        mTitle = ButterKnife.findById(root, R.id.add_task_title);
-        mDescription = ButterKnife.findById(root, R.id.add_task_description);
+        titleView = ButterKnife.findById(root, R.id.add_task_title);
+        descriptionView = ButterKnife.findById(root, R.id.add_task_description);
 
         setHasOptionsMenu(true);
         setRetainInstance(true);
@@ -90,7 +90,7 @@ public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTask
 
     @Override
     public void showEmptyTaskError() {
-        Snackbar.make(mTitle, getString(R.string.empty_task_message), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(titleView, getString(R.string.empty_task_message), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -101,12 +101,12 @@ public class AddEditTaskFragment extends TaskBaseFragment implements AddEditTask
 
     @Override
     public void setTitle(String title) {
-        mTitle.setText(title);
+        titleView.setText(title);
     }
 
     @Override
     public void setDescription(String description) {
-        mDescription.setText(description);
+        descriptionView.setText(description);
     }
 
     @Override

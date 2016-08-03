@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  */
 abstract public class TaskDrawerBaseActivity extends TaskBaseActivity {
 
-    private DrawerLayout mDrawerLayout;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void customizeActionBar(ActionBar actionBar) {
@@ -33,8 +33,8 @@ abstract public class TaskDrawerBaseActivity extends TaskBaseActivity {
 //        ab.setDisplayHomeAsUpEnabled(true);
 
         // Set up the navigation drawer.
-        mDrawerLayout = ButterKnife.findById(this, R.id.drawer_layout);
-        mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
+        drawerLayout = ButterKnife.findById(this, R.id.drawer_layout);
+        drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         NavigationView navigationView = ButterKnife.findById(this, R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
@@ -49,7 +49,7 @@ abstract public class TaskDrawerBaseActivity extends TaskBaseActivity {
                         invokeNavigationItem(menuItem.getItemId());
                         // Close the navigation drawer when an item is selected.
                         menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         return true;
                     }
                 });
@@ -64,7 +64,7 @@ abstract public class TaskDrawerBaseActivity extends TaskBaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // Open the navigation drawer when the home icon is selected from the toolbar.
-                mDrawerLayout.openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);

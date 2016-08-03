@@ -43,14 +43,13 @@ import javax.inject.Inject;
 public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTaskContract.Presenter {
 
     @NonNull
-    private final AddEditTaskContract.View mAddTaskView;
+    private final AddEditTaskContract.View addTaskView;
 
-    private final GetTask mGetTask;
-
-    private final SaveTask mSaveTask;
+    private final GetTask getTask;
+    private final SaveTask saveTask;
 
     @Nullable
-    private String mTaskId;
+    private String taskId;
 
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
@@ -61,10 +60,10 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
                          AddEditTaskContract.View addTaskView,
                          GetTask getTask, SaveTask saveTask) {
         super(useCaseHandler);
-        mTaskId = taskId;
-        mAddTaskView = addTaskView;
-        mGetTask = getTask;
-        mSaveTask = saveTask;
+        this.taskId = taskId;
+        this.addTaskView = addTaskView;
+        this.getTask = getTask;
+        this.saveTask = saveTask;
     }
 
     /**
@@ -73,7 +72,7 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
      */
     @Inject
     void setupListeners() {
-        mAddTaskView.setPresenter(this);
+        addTaskView.setPresenter(this);
     }
 
     @Override
@@ -98,14 +97,14 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
             throw new RuntimeException("populateTask() was called but task is new.");
         }
 
-        execute(mGetTask, mTaskId);
+        execute(getTask, taskId);
     }
 
     private void showTask(Task task) {
         // The view may not be able to handle UI updates anymore
-        if (mAddTaskView.isActive()) {
-            mAddTaskView.setTitle(task.getTitle());
-            mAddTaskView.setDescription(task.getDescription());
+        if (addTaskView.isActive()) {
+            addTaskView.setTitle(task.getTitle());
+            addTaskView.setDescription(task.getDescription());
         }
     }
 
@@ -115,21 +114,21 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
 
     private void showEmptyTaskError() {
         // The view may not be able to handle UI updates anymore
-        if (mAddTaskView.isActive()) {
-            mAddTaskView.showEmptyTaskError();
+        if (addTaskView.isActive()) {
+            addTaskView.showEmptyTaskError();
         }
     }
 
     private boolean isNewTask() {
-        return mTaskId == null;
+        return taskId == null;
     }
 
     private void createTask(String title, String description) {
         Task newTask = new Task(title, description);
         if (newTask.isEmpty()) {
-            mAddTaskView.showEmptyTaskError();
+            addTaskView.showEmptyTaskError();
         } else {
-            execute(mSaveTask, newTask);
+            execute(saveTask, newTask);
         }
     }
 
@@ -138,8 +137,8 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
             throw new RuntimeException("updateTask() was called but task is new.");
         }
 
-        Task newTask = new Task(title, description, mTaskId);
-        execute(mSaveTask, newTask);
+        Task newTask = new Task(title, description, taskId);
+        execute(saveTask, newTask);
     }
 
     @Override
@@ -154,7 +153,7 @@ public class AddEditTaskPresenter extends TaskBasePresenter implements AddEditTa
 
     @Override
     protected void successSaveTask() {
-        mAddTaskView.showTasksList();
+        addTaskView.showTasksList();
     }
 
     @Override

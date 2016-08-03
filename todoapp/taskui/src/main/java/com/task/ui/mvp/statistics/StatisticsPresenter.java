@@ -16,6 +16,8 @@
 
 package com.task.ui.mvp.statistics;
 
+import android.support.annotation.NonNull;
+
 import com.common.ui.app.UseCaseHandler;
 import com.task.domain.usecase.GetStatistics;
 import com.task.ui.mvp.TaskBasePresenter;
@@ -35,8 +37,11 @@ import javax.inject.Inject;
  * it's good practice minimise the visibility of the class/constructor as much as possible.
  **/
 final public class StatisticsPresenter extends TaskBasePresenter implements StatisticsContract.Presenter {
-    private final StatisticsContract.View mStatisticsView;
-    private final GetStatistics mGetStatistics;
+
+    @NonNull
+    private final StatisticsContract.View statisticsView;
+
+    private final GetStatistics getStatistics;
 
     /**
      * Dagger strictly enforces that arguments not marked with {@code @Nullable} are not injected
@@ -46,8 +51,8 @@ final public class StatisticsPresenter extends TaskBasePresenter implements Stat
     public StatisticsPresenter(UseCaseHandler useCaseHandler, StatisticsContract.View statisticsView,
                         GetStatistics getStatistics) {
         super(useCaseHandler);
-        mStatisticsView = statisticsView;
-        mGetStatistics = getStatistics;
+        this.statisticsView = statisticsView;
+        this.getStatistics = getStatistics;
     }
 
     /**
@@ -56,7 +61,7 @@ final public class StatisticsPresenter extends TaskBasePresenter implements Stat
      */
     @Inject
     void setupListeners() {
-        mStatisticsView.setPresenter(this);
+        statisticsView.setPresenter(this);
     }
 
     @Override
@@ -65,28 +70,28 @@ final public class StatisticsPresenter extends TaskBasePresenter implements Stat
     }
 
     private void loadStatistics() {
-        mStatisticsView.setProgressIndicator(true);
+        statisticsView.setProgressIndicator(true);
 
-        execute(mGetStatistics);
+        execute(getStatistics);
     }
 
     @Override
     protected void successGetStatistics(int activeTasks, int completedTasks) {
         // The view may not be able to handle UI updates anymore
-        if (!mStatisticsView.isActive()) {
+        if (!statisticsView.isActive()) {
             return;
         }
-        mStatisticsView.setProgressIndicator(false);
+        statisticsView.setProgressIndicator(false);
 
-        mStatisticsView.showStatistics(activeTasks, completedTasks);
+        statisticsView.showStatistics(activeTasks, completedTasks);
     }
 
     @Override
     protected void errorGetStatistics() {
         // The view may not be able to handle UI updates anymore
-        if (!mStatisticsView.isActive()) {
+        if (!statisticsView.isActive()) {
             return;
         }
-        mStatisticsView.showLoadingStatisticsError();
+        statisticsView.showLoadingStatisticsError();
     }
 }

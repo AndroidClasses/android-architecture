@@ -33,22 +33,12 @@ import javax.inject.Inject;
 public class TaskDetailActivity extends TaskBaseActivity {
 
     @Inject
-    TaskDetailPresenter mTaskDetailPresenter;
+    TaskDetailPresenter presenter;
 
     @Override
     protected int getLayoutResourceId() {
             return R.layout.taskdetail_act;
     }
-
-//    @Override
-//    protected void onFragmentAddBefore() {
-//        // Set up the toolbar.
-//        Toolbar toolbar = ButterKnife.findById(this, R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        ActionBar ab = getSupportActionBar();
-//        ab.setDisplayHomeAsUpEnabled(true);
-//        ab.setDisplayShowHomeEnabled(true);
-//    }
 
     @Override
     protected Fragment newFragmentInstance() {

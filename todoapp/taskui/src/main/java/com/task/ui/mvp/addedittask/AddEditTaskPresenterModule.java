@@ -12,23 +12,23 @@ import dagger.Provides;
 @Module
 public class AddEditTaskPresenterModule {
 
-    private final AddEditTaskContract.View mView;
+    private final AddEditTaskContract.View view;
 
-    private String mTaskId;
+    private String taskId;
 
     public AddEditTaskPresenterModule(AddEditTaskContract.View view, @Nullable String taskId) {
-        mView = view;
-        mTaskId = taskId;
+        this.view = view;
+        this.taskId = taskId;
     }
 
     @Provides
     AddEditTaskContract.View provideAddEditTaskContractView() {
-        return mView;
+        return view;
     }
 
     @Provides
     @Nullable
     String provideTaskId() {
-        return mTaskId;
+        return taskId;
     }
 }

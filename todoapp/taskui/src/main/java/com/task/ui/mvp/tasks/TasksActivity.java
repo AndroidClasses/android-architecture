@@ -33,7 +33,7 @@ public class TasksActivity extends TaskDrawerBaseActivity {
     private static final String CURRENT_FILTERING_KEY = "CURRENT_FILTERING_KEY";
 
     @Inject
-    TasksPresenter mTasksPresenter;
+    TasksPresenter presenter;
 
     @Override
     protected int getLayoutResourceId() {
@@ -66,13 +66,13 @@ public class TasksActivity extends TaskDrawerBaseActivity {
         if (savedInstanceState != null) {
             TasksFilterType currentFiltering =
                     (TasksFilterType) savedInstanceState.getSerializable(CURRENT_FILTERING_KEY);
-            mTasksPresenter.setFiltering(currentFiltering);
+            presenter.setFiltering(currentFiltering);
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(CURRENT_FILTERING_KEY, mTasksPresenter.getFiltering());
+        outState.putSerializable(CURRENT_FILTERING_KEY, presenter.getFiltering());
 
         super.onSaveInstanceState(outState);
     }

@@ -14,9 +14,7 @@ import dagger.Component;
  * scope must be specified. All fragment components use a custom scope for this purpose.
  */
 @FragmentScoped
-@Component(dependencies = TasksRepositoryComponent.class,
-        modules = AddEditTaskPresenterModule.class)
+@Component(dependencies = TasksRepositoryComponent.class, modules = AddEditTaskPresenterModule.class)
 public interface AddEditTaskComponent {
-
     void inject(AddEditTaskActivity addEditTaskActivity);
 }
