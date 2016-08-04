@@ -1,5 +1,6 @@
 // light wrapper for targets domain within an Android Application.
 include ':app'
+include ':sample'
 
 // modules involves android framework begin, include presenter and view of
 // MVP pattern for each domain and 'uicommon' for all domain
