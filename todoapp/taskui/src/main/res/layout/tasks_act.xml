@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/including_fragment_placeholder" />
+            <include layout="@layout/including_fragment_holder" />
 
             <include layout="@layout/including_float_actionbar"
                 android:id="@+id/fab_add_task"

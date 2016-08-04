@@ -30,7 +30,7 @@
         <include layout="@layout/including_toolbar" />
 
 
-        <include layout="@layout/including_fragment_placeholder" />
+        <include layout="@layout/including_fragment_holder" />
 
     </LinearLayout>
 
