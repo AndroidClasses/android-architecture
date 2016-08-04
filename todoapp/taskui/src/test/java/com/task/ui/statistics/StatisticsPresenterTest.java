@@ -16,13 +16,13 @@
 
 package com.task.ui.statistics;
 
-import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
-import com.repository.task.model.Task;
+import com.example.aar.TestUseCaseScheduler;
+import com.google.common.collect.Lists;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
+import com.repository.task.model.Task;
 import com.task.domain.usecase.GetStatistics;
-import com.google.common.collect.Lists;
 import com.task.ui.mvp.statistics.StatisticsContract;
 import com.task.ui.mvp.statistics.StatisticsPresenter;
 

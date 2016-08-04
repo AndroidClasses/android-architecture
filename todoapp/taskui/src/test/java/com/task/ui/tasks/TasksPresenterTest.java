@@ -16,17 +16,17 @@
 
 package com.task.ui.tasks;
 
-import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
-import com.repository.task.model.Task;
+import com.example.aar.TestUseCaseScheduler;
+import com.google.common.collect.Lists;
 import com.repository.task.data.TasksDataSource.LoadTasksCallback;
 import com.repository.task.data.TasksRepository;
-import com.task.domain.usecase.filter.FilterFactory;
+import com.repository.task.model.Task;
 import com.task.domain.usecase.ActivateTask;
 import com.task.domain.usecase.ClearCompleteTasks;
 import com.task.domain.usecase.CompleteTask;
 import com.task.domain.usecase.GetTasks;
-import com.google.common.collect.Lists;
+import com.task.domain.usecase.filter.FilterFactory;
 import com.task.domain.usecase.filter.TasksFilterType;
 import com.task.ui.mvp.tasks.TasksContract;
 import com.task.ui.mvp.tasks.TasksPresenter;

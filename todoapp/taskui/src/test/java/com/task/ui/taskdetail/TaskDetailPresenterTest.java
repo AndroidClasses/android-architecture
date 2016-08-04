@@ -16,15 +16,15 @@
 
 package com.task.ui.taskdetail;
 
-import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
-import com.task.domain.usecase.DeleteTask;
-import com.task.domain.usecase.GetTask;
-import com.repository.task.model.Task;
+import com.example.aar.TestUseCaseScheduler;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
+import com.repository.task.model.Task;
 import com.task.domain.usecase.ActivateTask;
 import com.task.domain.usecase.CompleteTask;
+import com.task.domain.usecase.DeleteTask;
+import com.task.domain.usecase.GetTask;
 import com.task.ui.mvp.taskdetail.TaskDetailContract;
 import com.task.ui.mvp.taskdetail.TaskDetailPresenter;
 

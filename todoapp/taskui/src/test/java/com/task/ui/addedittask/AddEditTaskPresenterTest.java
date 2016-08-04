@@ -16,13 +16,13 @@
 
 package com.task.ui.addedittask;
 
-import com.example.aar.TestUseCaseScheduler;
 import com.common.ui.app.UseCaseHandler;
-import com.task.domain.usecase.GetTask;
-import com.task.domain.usecase.SaveTask;
-import com.repository.task.model.Task;
+import com.example.aar.TestUseCaseScheduler;
 import com.repository.task.data.TasksDataSource;
 import com.repository.task.data.TasksRepository;
+import com.repository.task.model.Task;
+import com.task.domain.usecase.GetTask;
+import com.task.domain.usecase.SaveTask;
 import com.task.ui.mvp.addedittask.AddEditTaskContract;
 import com.task.ui.mvp.addedittask.AddEditTaskPresenter;
 
