@@ -113,7 +113,9 @@ dependencies {
     androidTestCompile libraries.dexmakerMockito
 
     // Espresso UI Testing
-    androidTestCompile libraries.espressoCore
+    androidTestCompile (libraries.espressoCore) {
+        exclude group: "com.google.guava"
+    }
     androidTestCompile libraries.espressoContrib
     androidTestCompile libraries.espressoIntents
 

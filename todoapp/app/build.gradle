@@ -56,6 +56,19 @@ android {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 /*
@@ -88,28 +101,28 @@ dependencies {
 //    provided 'org.glassfish:javax.annotation:10.0-b28'
 //    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
 
-    // Dependencies for local unit tests
-    testCompile libraries.junit
-    testCompile libraries.mockitoAll
-    testCompile libraries.hamcrestAll
-
-    // Android Testing Support Library's runner and rules
-    androidTestCompile libraries.supportTestRunner
-    androidTestCompile libraries.supportTestRules
-
-    // Dependencies for Android unit tests
-    androidTestCompile libraries.junit
-    androidTestCompile libraries.mockitoCore
-    androidTestCompile libraries.dexmaker
-    androidTestCompile libraries.dexmakerMockito
-
-    // Espresso UI Testing
-    androidTestCompile libraries.espressoCore
-    androidTestCompile libraries.espressoContrib
-    androidTestCompile libraries.espressoIntents
-
-    // Resolve conflicts between main and test APK:
-    androidTestCompile libraries.supportAnnotations
-    androidTestCompile libraries.supportV4
-    androidTestCompile libraries.supportRecyclerView
+//    // Dependencies for local unit tests
+//    testCompile libraries.junit
+//    testCompile libraries.mockitoAll
+//    testCompile libraries.hamcrestAll
+//
+//    // Android Testing Support Library's runner and rules
+//    androidTestCompile libraries.supportTestRunner
+//    androidTestCompile libraries.supportTestRules
+//
+//    // Dependencies for Android unit tests
+//    androidTestCompile libraries.junit
+//    androidTestCompile libraries.mockitoCore
+//    androidTestCompile libraries.dexmaker
+//    androidTestCompile libraries.dexmakerMockito
+//
+//    // Espresso UI Testing
+//    androidTestCompile libraries.espressoCore
+//    androidTestCompile libraries.espressoContrib
+//    androidTestCompile libraries.espressoIntents
+//
+//    // Resolve conflicts between main and test APK:
+//    androidTestCompile libraries.supportAnnotations
+//    androidTestCompile libraries.supportV4
+//    androidTestCompile libraries.supportRecyclerView
 }
