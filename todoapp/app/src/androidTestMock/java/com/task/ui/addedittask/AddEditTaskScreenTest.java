@@ -22,7 +22,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.example.aar.R;
+import com.clean.aar.R;
+import com.task.ui.mvp.addedittask.AddEditTaskActivity;
 
 import org.junit.After;
 import org.junit.Before;

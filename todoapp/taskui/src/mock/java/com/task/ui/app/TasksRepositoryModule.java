@@ -1,8 +1,7 @@
-package com.example.aar;
+package com.task.ui.app;
 
 import android.content.Context;
 
-import com.example.aar.data.FakeTasksRemoteDataSource;
 import com.repository.task.data.Local;
 import com.repository.task.data.Remote;
 import com.repository.task.data.TasksDataSource;

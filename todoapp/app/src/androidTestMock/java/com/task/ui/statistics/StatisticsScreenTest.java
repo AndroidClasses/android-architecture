@@ -24,8 +24,9 @@ import android.test.suitebuilder.annotation.LargeTest;
 
 import com.clean.aar.R;
 import com.example.aar.data.FakeTasksRemoteDataSource;
-import com.task.ui.taskdetail.TaskDetailActivity;
 import com.repository.task.model.Task;
+import com.task.ui.mvp.statistics.StatisticsActivity;
+import com.task.ui.mvp.taskdetail.TaskDetailActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

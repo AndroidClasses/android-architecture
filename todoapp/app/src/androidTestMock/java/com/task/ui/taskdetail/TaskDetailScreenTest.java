@@ -26,6 +26,8 @@ import com.clean.aar.R;
 import com.example.aar.TestUtils;
 import com.example.aar.data.FakeTasksRemoteDataSource;
 import com.repository.task.model.Task;
+import com.task.ui.Constants;
+import com.task.ui.mvp.taskdetail.TaskDetailActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -100,7 +102,7 @@ public class TaskDetailScreenTest {
 
         // Lazily start the Activity from the ActivityTestRule this time to inject the start Intent
         Intent startIntent = new Intent();
-        startIntent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, task.getId());
+        startIntent.putExtra(Constants.EXTRA_TASK_ID, task.getId());
         mTaskDetailActivityTestRule.launchActivity(startIntent);
     }
 
