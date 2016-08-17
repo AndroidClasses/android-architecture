@@ -1,7 +1,8 @@
 package com.task.ui.mvp;
 
+import android.content.Context;
+
 import com.common.ui.CommonBaseActivity;
-import com.common.ui.app.CommonApplication;
 import com.task.ui.R;
 import com.task.ui.app.TaskRepositoryHolder;
 import com.task.ui.app.TasksRepositoryComponent;
@@ -13,13 +14,16 @@ import com.task.ui.app.TasksRepositoryComponent;
  * 2. provide container id for super class to inject fragment
  */
 abstract public class TaskBaseActivity extends CommonBaseActivity {
-    protected TasksRepositoryComponent getTasksRepositoryComponent() {
-        CommonApplication app = CommonApplication.get(this);
+    public static TaskRepositoryHolder getRepositoryHolder(Context context) {
+        Context app = context.getApplicationContext();
         if (app instanceof TaskRepositoryHolder) {
             TaskRepositoryHolder repositoryHolder = (TaskRepositoryHolder) app;
-            return repositoryHolder.getTasksRepositoryComponent();
+            return repositoryHolder;
         }
         throw new IllegalStateException("It requires TaskRepositoryHolder context instance.");
+    }
+    protected TasksRepositoryComponent getTasksRepositoryComponent() {
+        return getRepositoryHolder(this).getTasksRepositoryComponent();
     }
 
     @Override

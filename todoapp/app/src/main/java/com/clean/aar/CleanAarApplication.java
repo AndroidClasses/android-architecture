@@ -2,7 +2,6 @@ package com.clean.aar;
 
 import android.app.Application;
 
-import com.common.ui.app.CommonApplication;
 import com.task.ui.app.TaskRepositoryHolder;
 import com.task.ui.app.TasksRepositoryComponent;
 import com.task.ui.app.TasksRepositoryComponentInstance;
@@ -26,7 +25,7 @@ import com.task.ui.mvp.tasks.TasksComponent;
  * completed and deleting it<BR />
  * {@link StatisticsComponent}: viewing statistics about your to do items<BR />
  */
-public class CleanAarApplication extends CommonApplication implements TaskRepositoryHolder {
+public class CleanAarApplication extends Application implements TaskRepositoryHolder {
 
     private TasksRepositoryComponent tasksRepositoryComponent;
 
